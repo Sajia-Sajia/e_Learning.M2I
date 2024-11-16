@@ -18,8 +18,9 @@ const ForgotPassword = () => {
     };
 
     return (
-        <div className="forgot-container">
-            {/* Barre de navigation fixée en haut
+            <>
+
+            {/* Barre de navigation fixée en haut */}
             <div className="navbar">
                 <div className="logo-home-container">
                     <img src="/images/logo.png" alt="Logo" style={{ height: '60px' }} />
@@ -28,7 +29,8 @@ const ForgotPassword = () => {
                         <span style={{ verticalAlign: 'middle', marginTop: '2px' }}> Home</span>
                     </Link>
                 </div>
-            </div> */}
+            </div >
+        <div className="forgot-container">
            
             <div className="forgot-form">
                 <h2>Vous avez oublié votre mot de passe ?</h2>
@@ -52,7 +54,7 @@ const ForgotPassword = () => {
             <div className="login-image">
                 <img src={im} alt="Login Illustration" />
             </div>
-        </div>
+        </div></>
     );
 };
 

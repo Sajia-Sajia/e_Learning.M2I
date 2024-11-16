@@ -3,6 +3,7 @@ import './ForgotPassword.css';
 import im from './forgotimg.png';
 import { FaLock } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import HomeIcon from '@mui/icons-material/Home';
 
 const Reset = () => {
 
@@ -33,9 +34,16 @@ const Reset = () => {
     };
 
     return (
-        <div className="forgot-container">
+        <>
 
-            
+            {/* Barre de navigation fixée en haut */}
+            <div className="navbar">
+                <div className="logo-home-container">
+                    <img src="/images/logo.png" alt="Logo" style={{ height: '60px' }} />
+                    
+                </div>
+            </div >
+        <div className="forgot-container">
 
             <div className="forgot-form">
                 
@@ -83,7 +91,7 @@ const Reset = () => {
             <div className="login-image">
                 <img src={im} alt="Login Illustration" />
             </div>
-        </div>
+            </div></>
     );
 };
 
