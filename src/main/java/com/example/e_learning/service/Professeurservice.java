@@ -11,9 +11,17 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ProfesseurserviceTest {
+public class Professeurservice {
     @Autowired
     private ProfesseurRepo professeurRepo;
+
+
+    // Vérifier si un professeur est administrateur par ikram
+    public boolean isAdmin(String professeurId) {
+        Professeur professeur = professeurRepo.findById(professeurId)
+                .orElseThrow(() -> new RuntimeException("Professeur non trouvé"));
+        return professeur.isIsadmin();
+    }
     @Autowired
     private AnnonceRepo annonceRepo;
 

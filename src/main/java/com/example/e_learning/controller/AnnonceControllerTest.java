@@ -1,7 +1,7 @@
 package com.example.e_learning.controller;
 
 import com.example.e_learning.model.Annonce;
-import com.example.e_learning.service.AnnonceServiceTest;
+import com.example.e_learning.service.AnnonceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ import java.util.Optional;
 @RequestMapping("/Annonce")
 public class AnnonceControllerTest {
     @Autowired
-    private AnnonceServiceTest annonceService;
+    private AnnonceService annonceService;
 
     
     @PostMapping("add")
