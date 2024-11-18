@@ -6,10 +6,10 @@ import org.springframework.stereotype.Component;
 
 
 @SpringBootApplication
-public class SprintoneApplication {
+public class E_LearningApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SprintoneApplication.class, args);
+		SpringApplication.run(E_LearningApplication.class, args);
 	}
 
 }
