@@ -1,9 +1,9 @@
-package com.example.sprintone.service;
+package com.example.e_learning.service;
 
-import com.example.sprintone.model.Annonce;
-import com.example.sprintone.model.Professeur;
-import com.example.sprintone.repository.AnnonceRepo;
-import com.example.sprintone.repository.ProfesseurRepo;
+import com.example.e_learning.model.Annonce;
+import com.example.e_learning.model.Professeur;
+import com.example.e_learning.repository.AnnonceRepo;
+import com.example.e_learning.repository.ProfesseurRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

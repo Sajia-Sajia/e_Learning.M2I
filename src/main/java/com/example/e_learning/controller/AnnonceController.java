@@ -1,7 +1,7 @@
-package com.example.sprintone.controller;
+package com.example.e_learning.controller;
 
-import com.example.sprintone.model.Annonce;
-import com.example.sprintone.service.AnnonceService;
+import com.example.e_learning.model.Annonce;
+import com.example.e_learning.service.AnnonceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.example.sprintone.model;
+package com.example.e_learning.model;
 
 
 import lombok.AllArgsConstructor;
