@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class AnnonceServiceTest {
+public class AnnonceService {
 
     @Autowired
     private AnnonceRepo annonceRepo;

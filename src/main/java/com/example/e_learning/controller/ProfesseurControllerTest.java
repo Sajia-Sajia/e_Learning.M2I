@@ -3,7 +3,7 @@ package com.example.e_learning.controller;
 import com.example.e_learning.model.Annonce;
 import com.example.e_learning.model.Professeur;
 
-import com.example.e_learning.service.ProfesseurserviceTest;
+import com.example.e_learning.service.Professeurservice;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.ResponseEntity;
@@ -17,7 +17,7 @@ import java.util.Optional;
 public class ProfesseurControllerTest {
 
     @Autowired
-    private ProfesseurserviceTest professeurService;
+    private Professeurservice professeurService;
 
     // Create a new professeur
     @PostMapping("/add")
@@ -85,4 +85,25 @@ public class ProfesseurControllerTest {
         professeurService.deleteAnnonceByProfesseur(professeurId, annonceId);
         return ResponseEntity.noContent().build();
     }
+    //get admin profile par ikram
+    @GetMapping("/admin/profile/{id}")
+    public ResponseEntity<Professeur> getAdminProfile(@PathVariable String id) {
+    if (professeurService.isAdmin(id)) {
+        Optional<Professeur> professeur = professeurService.getProfesseurById(id);
+        return professeur.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+    return ResponseEntity.status(403).build(); // Forbidden si non-admin
+}
+    //update admin profile par ikram
+  
+    @PutMapping("/admin/update/{id}")
+    public ResponseEntity<Professeur> updateAdminProfile(@PathVariable String id, @RequestBody Professeur professeur) {
+    Professeur updatedProfesseur = professeurService.updateProfesseur(id, professeur);
+    return ResponseEntity.ok(updatedProfesseur);
+}
+
+    
+    
+
 }
