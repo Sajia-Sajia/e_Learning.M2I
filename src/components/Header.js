@@ -1,22 +1,31 @@
 import React, { useState } from 'react';
-import { AppBar, Toolbar, Typography, Button, Box, Popover, List, ListItem, Dialog, DialogTitle, DialogContent, TextField, DialogActions } from '@mui/material';
+import { AppBar, Toolbar, Typography, Button, Box, Popover, List, ListItem, Dialog, DialogTitle, DialogContent, TextField, DialogActions, Menu, MenuItem } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 import emailjs from 'emailjs-com';
-import Login from '../Pages/Login';
-
-
-import { Link } from 'react-router-dom';
+import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Header = ({ showSemester }) => {
     const [anchorElProgram, setAnchorElProgram] = useState(null);
+    const [anchorElOpportunite, setAnchorElOpportunite] = useState(null);
     const [openContactForm, setOpenContactForm] = useState(false);
     const [contactForm, setContactForm] = useState({ name: '', email: '', message: '' });
 
+    const navigate = useNavigate(); // Pour la navigation vers ProgramPage
+
     const handleProgramOpen = (event) => setAnchorElProgram(event.currentTarget);
     const handleProgramClose = () => setAnchorElProgram(null);
+
+    const handleOpportuniteOpen = (event) => setAnchorElOpportunite(event.currentTarget);
+    const handleOpportuniteClose = () => setAnchorElOpportunite(null);
+
+    const handleProgramClick = () => {
+        navigate('/ProgramPage');  // Redirection vers la page ProgramPage
+        handleProgramClose();
+    };
 
     const handleScrollToSection = (sectionId) => {
         const sectionElement = document.getElementById(sectionId);
@@ -85,41 +94,32 @@ const Header = ({ showSemester }) => {
                             Home
                         </Button>
 
-                        <Button sx={{ margin: '0 10px', color: 'black' }} onClick={handleProgramOpen}>
+                        <Button sx={{ margin: '0 10px', color: 'black' }} onClick={handleProgramClick}>
                             <MenuBookIcon sx={{ marginRight: '5px', color: 'rgba(128, 128, 128, 0.5)' }} />
                             Programme
                         </Button>
-                        <Popover
-                            open={Boolean(anchorElProgram)}
-                            anchorEl={anchorElProgram}
-                            onClose={handleProgramClose}
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'left',
-                            }}
-                            PaperProps={{
-                                sx: popoverStyles,
-                            }}
-                        >
-                            <List>
-                                <ListItem button onClick={() => { showSemester('semestre1'); handleProgramClose(); }}>Semestre 1</ListItem>
-                                <ListItem button onClick={() => { showSemester('semestre2'); handleProgramClose(); }}>Semestre 2</ListItem>
-                                <ListItem button onClick={() => { showSemester('semestre3'); handleProgramClose(); }}>Semestre 3</ListItem>
-                                <ListItem button onClick={() => { showSemester('semestre4'); handleProgramClose(); }}>Semestre 4</ListItem>
-                            </List>
-                        </Popover>
+
+                        <Button sx={{ margin: '0 10px', color: 'black' }} onClick={handleOpportuniteOpen}>
+                        <BusinessCenterIcon sx={{ marginRight: '5px', color: 'rgba(128, 128, 128, 0.5)' }} />
+                           Opportunités de Carrière
+                         </Button>
+                        <Menu
+                           anchorEl={anchorElOpportunite}
+                           open={Boolean(anchorElOpportunite)}
+                           onClose={handleOpportuniteClose}
+      >
+                        <MenuItem onClick={() => window.open('https://www.linkedin.com', '_blank')}>LinkedIn</MenuItem>
+                        <MenuItem onClick={() => window.open('https://www.indeed.com', '_blank')}>Indeed</MenuItem>
+                        <MenuItem onClick={() => window.open('https://www.allmyjobs.com', '_blank')}>AllMyAlert</MenuItem>
+                        <MenuItem onClick={() => window.open('https://www.edx.org', '_blank')}>edX</MenuItem>
+                        <MenuItem onClick={() => window.open('https://www.coursera.org', '_blank')}>Coursera</MenuItem>
+                        </Menu>
 
                         <Button sx={{ margin: '0 10px', color: 'black' }} onClick={handleOpenContactForm}>
                             <MailOutlineIcon sx={{ marginRight: '5px', color: 'rgba(128, 128, 128, 0.5)' }} />
                             Contactez-nous
                         </Button>
-
-                        <Button sx={{ margin: '0 10px', color: 'black' }}>
-                            <WorkOutlineIcon sx={{ marginRight: '5px', color: 'rgba(128, 128, 128, 0.5)' }} />
-                            Opportunité
-                        </Button>
                     </Box>
-
 
                     <Link to="/Login">
                         <Button
@@ -138,7 +138,6 @@ const Header = ({ showSemester }) => {
                             Login
                         </Button>
                     </Link>
-
                 </Toolbar>
             </AppBar>
 

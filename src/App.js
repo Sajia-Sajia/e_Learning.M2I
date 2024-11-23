@@ -23,6 +23,7 @@ function App() {
          <div className="App">
             <Routes>
                 <Route path="/" element={<HomePage />} />
+                <Route path="/ProgramPage" element={<ProgramPage />} />
                 <Route path="/Login" element={<Login />} />
                 <Route path="/ForgotPassword" element={<ForgotPassword />} />
                 <Route path="/Reset" element={<Reset />} />
