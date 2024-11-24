@@ -15,12 +15,12 @@ const MotivationBox = ({ onOpenForm }) => {
         borderRadius: '0px',
         borderLeft: '5px solid transparent',
         position: 'relative',
-        height: '200px', // Réduire la hauteur
+        height: '350px', // Réduire la hauteur
         width: '950px', // Réduire la largeur
-        margin: '20px 0 0 20px', // Espace devant l'élément précédent
+        margin: '10px 0 0 10px', // Espace devant l'élément précédent
         zIndex: 1,
-        borderTopLeftRadius: '500px',
-        borderBottomLeftRadius: '500px',
+        borderTopLeftRadius: '600px',
+        borderBottomLeftRadius: '600px',
         backgroundImage: `
           linear-gradient(rgba(64, 155, 212, 0.5), rgba(64, 155, 212, 0.5)),
           url('https://th.bing.com/th/id/R.f278011f51f3d23dec18c2a1ca1bc551?rik=XrMu1WefGZnF2Q&pid=ImgRaw&r=0')

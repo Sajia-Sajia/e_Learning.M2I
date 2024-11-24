@@ -16,7 +16,12 @@ import Sidebar from './annonces/Sidebar';
 import Topbar from './annonces/Topbar';
 import "./annonces/sb-admin-2.min.css";
 import Dashboard from './annonces/Dashboard';
-
+import PageEtudiants from './etudiant/PageEtudiants';
+import Semestre1 from './etudiant/Semestre1';
+import Semestre2 from './etudiant/Semestre2';
+import Semestre4 from './etudiant/Semestre4';
+import Semestre3 from './etudiant/Semestre3';
+import Quiz from './etudiant/Quiz';
 function App() {
     return (
 
@@ -35,6 +40,12 @@ function App() {
                     <Route path='user-view/:id' element={<UserView />} />
                     <Route path='user-edit/:id' element={<UserEdit />} />
                 </Route>
+                <Route path="/etudiants" element={<PageEtudiants />} />
+                <Route path="/semestre-1" element={<Semestre1 />} />
+                <Route path="/semestre-2" element={<Semestre2 />} />
+                <Route path="/semestre-3" element={<Semestre3 />} />
+                <Route path="/semestre-4" element={<Semestre4 />} />
+                <Route path="/Quiz" element={<Quiz />} />
             </Routes>
             </div>
 

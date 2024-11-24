@@ -1,0 +1,74 @@
+.dashboard-container {
+  display: flex;
+  gap: 20px;
+  /* Espacement entre les cartes */
+  padding: 20px;
+}
+
+.welcome-card,
+.company-card {
+  flex: 1;
+  /* Les cartes occupent le même espace disponible */
+  background-color: #e6f7f2;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Espace entre le contenu */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 200px;
+  /* Assure la même hauteur pour toutes les cartes */
+}
+
+.welcome-card img,
+.company-card img {
+  max-width: 200px;
+  max-height: 2000px;
+  object-fit: contain;
+  margin-left: 20px;
+  border-radius: 8px;
+}
+
+.company-card {
+  display: flex;
+  flex-direction: column;
+  /* Place le contenu verticalement */
+  justify-content: space-between;
+  /* Espace vertical équilibré */
+  text-align: left;
+}
+
+.company-card h4 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.company-card p {
+  margin: 5px 0;
+}
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.stats-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.stats-card p {
+  margin: 0;
+  color: #333;
+}
+
+.stats-card h3 {
+  font-size: 2rem;
+  margin-top: 10px;
+  font-weight: bold;
+}
