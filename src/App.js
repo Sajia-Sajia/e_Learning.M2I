@@ -1,12 +1,11 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Login from './Pages/Login';
 import Reset from './Pages/Reset';
 import ForgotPassword from './Pages/ForgotPassword';
 import HomePage from './Pages/HomePage'; 
-import ProgramPage from './Pages/ProgramPage';
 import Userlist from './annonces/Userlist';
 import Portal from './annonces/Portal';
 import Portalprof from './pageprof/Portalprof';
@@ -15,7 +14,6 @@ import UserView from './annonces/UserView';
 import UserEdit from './annonces/UserEdit';
 import Sidebar from './annonces/Sidebar';
 import Sidebarprof from './pageprof/Sidebarprof';
-import Topbar from './annonces/Topbar';
 import "./annonces/sb-admin-2.min.css";
 import Dashboard from './annonces/Dashboard';
 import TPList from './pageprof/TPList';
@@ -25,7 +23,7 @@ import TDList from "./pageprof/TDList";
 import TDcreate from "./pageprof/TDcreate";
 import TDedit from "./pageprof/TDedit";
 import CourCreate from "./pageprof/CourCreate";
-import editcour from "./pageprof/EditCour";
+import Editcour from "./pageprof/EditCour";
 import Courslist from "./pageprof/CoursList";
 import AnnoncesList from "./pageprof/AnnocesList";
 import AnnonceCreate from "./pageprof/AnnonceCreate";
@@ -57,7 +55,7 @@ function App() {
 
                     <Route path='tp-list' element={<TPList />} />
                     <Route path='create-tp' element={<TPcreate />} />
-                    <Route path='td-edit/:id' element={<TPedit />} />
+                    <Route path='tp-edit/:id' element={<TPedit />} />
 
                     <Route path='td-list' element={<TDList />} />
                     <Route path='create-td' element={<TDcreate />} />
@@ -65,7 +63,7 @@ function App() {
 
                     <Route path='cours-list' element={<Courslist />} />
                     <Route path='create-cour' element={<CourCreate />} />
-                    <Route path='cour-edit/:id' element={<editcour />} />
+                    <Route path='cour-edit/:id' element={<Editcour />} />
                 </Route>
             </Routes>
             </div>
