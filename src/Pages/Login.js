@@ -116,7 +116,7 @@ const Login = () => {
                             textAlign: 'center',
                             display: 'inline-block'
                         }} >Effacer le formulaire ?</label>
-                        <Link to="/sidebar">Connexion Reussie</Link>
+                        <Link to="/sidebarprof">Connexion Reussie</Link>
 
                         <Link to="/ForgotPassword">Mot de passe oublié ?</Link>
                     </div>

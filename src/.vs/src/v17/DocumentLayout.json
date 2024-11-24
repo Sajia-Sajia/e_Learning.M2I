@@ -74,7 +74,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 11,
+          "SelectedChildIndex": 13,
           "Children": [
             {
               "$type": "Bookmark",
@@ -97,6 +97,14 @@
               "Name": "ST:3:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:4:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "ForgotPassword.css",
@@ -106,8 +114,7 @@
               "RelativeToolTip": "Pages\\ForgotPassword.css",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2024-11-11T02:10:19.198Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-11T02:10:19.198Z"
             },
             {
               "$type": "Document",
@@ -119,8 +126,7 @@
               "RelativeToolTip": "Pages\\ForgotPassword.js",
               "ViewState": "AQIAABIAAAAAAAAAAAAAAB0AAAAWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-11-11T02:01:28.257Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-11T02:01:28.257Z"
             },
             {
               "$type": "Document",
@@ -132,8 +138,7 @@
               "RelativeToolTip": "Pages\\Reset.js",
               "ViewState": "AQIAABsAAAAAAAAAAAAAACUAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-11-11T02:01:13.227Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-11T02:01:13.227Z"
             },
             {
               "$type": "Document",
@@ -145,8 +150,7 @@
               "RelativeToolTip": "annonces\\Card.js",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-11-11T01:56:44.74Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-11T01:56:44.74Z"
             },
             {
               "$type": "Document",
@@ -158,8 +162,7 @@
               "RelativeToolTip": "annonces\\sb-admin-2.min.css",
               "ViewState": "AQIAAAkAAAAAAAAAAAAAAAkAAAAXNQIA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2024-11-11T01:54:41.682Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-11T01:54:41.682Z"
             },
             {
               "$type": "Document",
@@ -171,8 +174,7 @@
               "RelativeToolTip": "annonces\\Portal.js",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-11-11T01:54:36.731Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-11T01:54:36.731Z"
             },
             {
               "$type": "Document",
@@ -182,7 +184,7 @@
               "RelativeDocumentMoniker": "Pages\\Login.css",
               "ToolTip": "C:\\Users\\disfra\\Desktop\\plateform-m2i\\src\\Pages\\Login.css",
               "RelativeToolTip": "Pages\\Login.css",
-              "ViewState": "AQIAAB0AAAAAAAAAAADwvzIAAAAAAAAA",
+              "ViewState": "AQIAACgAAAAAAAAAAAAuwDIAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
               "WhenOpened": "2024-11-11T01:44:59.787Z",
               "EditorCaption": ""
@@ -197,8 +199,7 @@
               "RelativeToolTip": "annonces\\UserView.js",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-11-11T01:35:17.241Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-11T01:35:17.241Z"
             },
             {
               "$type": "Document",
@@ -210,8 +211,7 @@
               "RelativeToolTip": "Pages\\Login.js",
               "ViewState": "AQIAAGwAAAAAAAAAAAAIwJYAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-11-11T01:05:36.604Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-11T01:05:36.604Z"
             },
             {
               "$type": "Document",
@@ -223,8 +223,7 @@
               "RelativeToolTip": "annonces\\Userlist.js",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-11-11T00:57:21.281Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-11T00:57:21.281Z"
             },
             {
               "$type": "Document",
@@ -236,8 +235,7 @@
               "RelativeToolTip": "App.js",
               "ViewState": "AQIAABAAAAAAAAAAAIAwwBwAAAAfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-11-11T00:58:41.524Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-11T00:58:41.524Z"
             },
             {
               "$type": "Document",
@@ -249,8 +247,7 @@
               "RelativeToolTip": "annonces\\Sidebar.js",
               "ViewState": "AQIAAAUAAAAAAAAAAADwvxsAAABCAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-11-11T00:57:42.729Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-11T00:57:42.729Z"
             },
             {
               "$type": "Document",
@@ -262,12 +259,7 @@
               "RelativeToolTip": "annonces\\setupTests.js",
               "ViewState": "AQIAAAUAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-11-11T00:57:44.949Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+              "WhenOpened": "2024-11-11T00:57:44.949Z"
             },
             {
               "$type": "Document",
@@ -278,8 +270,7 @@
               "ToolTip": "C:\\Users\\disfra\\Desktop\\plateform-m2i\\src\\Pages\\image.png",
               "RelativeToolTip": "Pages\\image.png",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
-              "WhenOpened": "2024-11-11T01:23:50.023Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-11T01:23:50.023Z"
             },
             {
               "$type": "Document",
@@ -291,8 +282,7 @@
               "RelativeToolTip": "components\\Header.js",
               "ViewState": "AQIAADkAAAAAAAAAAAAAAAcAAAAjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-11-11T01:08:19.336Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-11T01:08:19.336Z"
             },
             {
               "$type": "Document",
@@ -304,12 +294,7 @@
               "RelativeToolTip": "Pages\\HomePage.jsx",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
-              "WhenOpened": "2024-11-11T01:08:10.199Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:4:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+              "WhenOpened": "2024-11-11T01:08:10.199Z"
             }
           ]
         }
