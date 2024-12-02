@@ -3,36 +3,55 @@ import { useFormik } from "formik";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function UserCreate() {
+function Createstudent() {
   const [isLoading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const myFormik = useFormik({
     initialValues: {
-      title: "",
-      description: "",
-      date: "",
-      heure: "",
-      type: "",
-      auteurId: ""
+      nom: "",
+      prenom: "",
+      email: "",
+      modules: "",
+      cin: "",
+      cne: ""
     },
     validate: (values) => {
       const errors = {};
 
-      if (!values.title) errors.title = "Please enter title";
-      if (!values.description) errors.description = "Please enter description";
-      if (!values.date) errors.date = "Please enter date";
-      if (!values.heure) errors.heure = "Please enter time";
-      if (!values.type) errors.type = "Please select a type";
-      if (!values.auteurId) errors.auteurId = "Please enter author ID";
+      if (!values.nom) {
+        errors.nom = "Veuillez entrer le nom";
+      }
+
+      if (!values.prenom) {
+        errors.prenom = "Veuillez entrer le prénom";
+      }
+
+      if (!values.email) {
+        errors.email = "Veuillez entrer une adresse email";
+      } else if (!/\S+@\S+\.\S+/.test(values.email)) {
+        errors.email = "Adresse email invalide";
+      }
+
+      if (!values.modules) {
+        errors.modules = "Veuillez sélectionner un module";
+      }
+
+      if (!values.cin) {
+        errors.cin = "Veuillez entrer le CIN";
+      }
+
+      if (!values.cne) {
+        errors.cne = "Veuillez entrer le CNE";
+      }
 
       return errors;
     },
     onSubmit: async (values) => {
       try {
         setLoading(true);
-        await axios.post("http://localhost:8085/Annonce/add", values);
-        navigate("/portal/user-list");
+        await axios.post("http://localhost:8085/etudiants", values); // URL de votre API
+        navigate("/portal/liststudent"); // Redirige après la soumission
       } catch (error) {
         console.error("Erreur lors de la création :", error);
         setLoading(false);
@@ -42,17 +61,17 @@ function UserCreate() {
 
   return (
     <div className="container">
-      <h3>Create Annonce</h3>
+      <h3>Ajouter un étudiant</h3>
       <form onSubmit={myFormik.handleSubmit}>
         <div className="row">
-          {["title", "description", "date", "heure", "type", "auteurId"].map((field, index) => (
+          {["nom", "prenom", "email", "modules", "cin", "cne"].map((field, index) => (
             <div className="col-lg-6" key={index}>
               <label>{field.charAt(0).toUpperCase() + field.slice(1)}</label>
               <input
                 name={field}
                 value={myFormik.values[field]}
                 onChange={myFormik.handleChange}
-                type={field === "date" || field === "heure" ? field : "text"}
+                type={field === "email" ? "email" : "text"}
                 className={`form-control ${myFormik.errors[field] ? "is-invalid" : ""}`}
               />
               <span style={{ color: "red" }}>{myFormik.errors[field]}</span>
@@ -63,7 +82,7 @@ function UserCreate() {
           <input
             disabled={isLoading}
             type="submit"
-            value={isLoading ? "Submitting..." : "Create"}
+            value={isLoading ? "En cours..." : "Ajouter"}
             className="btn btn-primary"
           />
         </div>
@@ -72,4 +91,4 @@ function UserCreate() {
   );
 }
 
-export default UserCreate;
+export default Createstudent;

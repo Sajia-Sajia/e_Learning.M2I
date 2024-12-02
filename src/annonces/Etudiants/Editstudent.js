@@ -3,19 +3,19 @@ import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-function UserEdit() {
+function Editstudent() {
   const { id } = useParams();
   const [isLoading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    getAnnonceData();
+    getStudentData();
   }, []);
 
-  const getAnnonceData = async () => {
+  const getStudentData = async () => {
     try {
-      const response = await axios.get(`http://localhost:8085/Annonce/get/${id}`);
-      myFormik.setValues(response.data);
+      const response = await axios.get(`http://localhost:8085/etudiants/${id}`); // URL de votre API
+      myFormik.setValues(response.data); // Remplit le formulaire avec les données
       setLoading(false);
     } catch (error) {
       console.error("Erreur lors de la récupération des données :", error);
@@ -24,31 +24,49 @@ function UserEdit() {
 
   const myFormik = useFormik({
     initialValues: {
-      title: "",
-      description: "",
-      date: "",
-      heure: "",
-      type: "",
-      auteurId: ""
+      nom: "",
+      prenom: "",
+      email: "",
+      modules: "",
+      cin: "",
+      cne: ""
     },
     validate: (values) => {
       const errors = {};
 
-      if (!values.title) errors.title = "Please enter title";
-      if (!values.description) errors.description = "Please enter description";
-      if (!values.date) errors.date = "Please enter date";
-      if (!values.heure) errors.heure = "Please enter time";
-      if (!values.type) errors.type = "Please select a type";
-      if (!values.auteurId) errors.auteurId = "Please enter author ID";
+      if (!values.nom) {
+        errors.nom = "Veuillez entrer le nom";
+      }
+
+      if (!values.prenom) {
+        errors.prenom = "Veuillez entrer le prénom";
+      }
+
+      if (!values.email) {
+        errors.email = "Veuillez entrer une adresse email";
+      } else if (!/\S+@\S+\.\S+/.test(values.email)) {
+        errors.email = "Adresse email invalide";
+      }
+
+      if (!values.modules) {
+        errors.modules = "Veuillez sélectionner un module";
+      }
+
+      if (!values.cin) {
+        errors.cin = "Veuillez entrer le CIN";
+      }
+
+      if (!values.cne) {
+        errors.cne = "Veuillez entrer le CNE";
+      }
 
       return errors;
     },
     onSubmit: async (values) => {
       try {
         setLoading(true);
-        await axios.put(`http://localhost:8085/Annonce/update/${id}`, values);
-        setLoading(false);
-        navigate("/portal/user-list");
+        await axios.put(`http://localhost:8085/etudiants/${id}`, values); // URL de votre API
+        navigate("/portal/liststudent"); // Redirige après la soumission
       } catch (error) {
         console.error("Erreur lors de la mise à jour :", error);
         setLoading(false);
@@ -58,17 +76,17 @@ function UserEdit() {
 
   return (
     <div className="container">
-      <h3>Edit Annonce - ID : {id}</h3>
+      <h3>Modifier un étudiant - ID : {id}</h3>
       <form onSubmit={myFormik.handleSubmit}>
         <div className="row">
-          {["title", "description", "date", "heure", "type", "auteurId"].map((field, index) => (
+          {["nom", "prenom", "email", "modules", "cin", "cne"].map((field, index) => (
             <div className="col-lg-6" key={index}>
               <label>{field.charAt(0).toUpperCase() + field.slice(1)}</label>
               <input
                 name={field}
                 value={myFormik.values[field]}
                 onChange={myFormik.handleChange}
-                type={field === "date" || field === "heure" ? field : "text"}
+                type={field === "email" ? "email" : "text"}
                 className={`form-control ${myFormik.errors[field] ? "is-invalid" : ""}`}
               />
               <span style={{ color: "red" }}>{myFormik.errors[field]}</span>
@@ -79,7 +97,7 @@ function UserEdit() {
           <input
             disabled={isLoading}
             type="submit"
-            value={isLoading ? "Updating..." : "Update"}
+            value={isLoading ? "En cours..." : "Mettre à jour"}
             className="btn btn-primary"
           />
         </div>
@@ -88,4 +106,4 @@ function UserEdit() {
   );
 }
 
-export default UserEdit;
+export default Editstudent;

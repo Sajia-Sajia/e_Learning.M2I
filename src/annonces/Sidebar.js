@@ -30,7 +30,24 @@ function Sidebar() {
                     <span>Gèrer Annonces</span>
                 </Link>
             </li>
-
+            <li className="nav-item active">
+                <Link className="nav-link" to="/portal/list">
+                    <FontAwesomeIcon icon={faUsers} style={{ marginRight: "0.5rem" }} />
+                    <span>Gèrer professeur</span>
+                </Link>
+            </li>
+            <li className="nav-item active">
+                <Link className="nav-link" to="/portal/liststudent">
+                    <FontAwesomeIcon icon={faUsers} style={{ marginRight: "0.5rem" }} />
+                    <span>Gèrer Etudiants</span>
+                </Link>
+            </li>
+            <li className="nav-item active">
+                <Link className="nav-link" to="/portal/listmodule">
+                    <FontAwesomeIcon icon={faUsers} style={{ marginRight: "0.5rem" }} />
+                    <span>Gèrer modules</span>
+                </Link>
+            </li>
         </ul>
     )
 }
