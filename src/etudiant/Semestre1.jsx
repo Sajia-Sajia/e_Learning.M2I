@@ -87,16 +87,17 @@ function Dashboard() {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              minHeight: "100vh",
+              
             }}
           >
             <Box
               className="table-card"
               sx={{
                 width: "900px",
-                minHeight: "500px",
+                maxHeight: "550px",
                 borderRadius: "10px",
                 padding: "30px",
+            
                 boxShadow: "0px 6px 15px rgba(0, 0, 0, 0.6)",
                 backgroundColor: "#ffffff",
                 border: "1px solid #ddd",

@@ -1,113 +1,53 @@
-/* Disposition générale */
 .semestre4-layout {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    /* Centre verticalement */
+    align-items: center;
+    /* Centre horizontalement */
     height: 100vh;
-}
-
-/* Section principale : Sidebar + Contenu */
-.semestre4-main {
-    display: flex;
-    flex: 1;
-    overflow: hidden;
-    /* Évite tout débordement */
-}
-
-.sidebar {
-    width: 250px;
-    /* Largeur fixe pour la Sidebar */
-    background-color: #e6f7f2;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    height: calc(100vh - 60px);
-    /* Ajuste la hauteur en fonction de la Topbar */
-    position: fixed;
-    /* Garde la Sidebar toujours visible */
-    top: 60px;
-    /* Décalage sous la Topbar */
+    background-color: #f9f9f9;
 }
 
 .semestre4-content {
     margin-left: 250px;
-    /* Décalage correspondant à la largeur de la Sidebar */
-    flex: 1;
-    padding: 20px;
+    /* Conserver l'espace pour la Sidebar */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 60px);
+    /* Ajuste la hauteur visible */
     background-color: #f9f9f9;
-    overflow-y: auto;
-    /* Permet de scroller si le contenu est long */
-}
-
-/* Titre */
-.semestre4-title {
     text-align: center;
-    font-size: 2rem;
-    color: #1976d2;
-    margin-bottom: 20px;
+    flex-direction: column;
+    /* Aligne les enfants en colonne */
+}
+.sidebar {
+    width: 250px;
+    background-color: #e6f7f2;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    /* La Sidebar est fixe */
+    height: 100vh;
+    /* Prend toute la hauteur de l'écran */
+    z-index: 1001;
+    /* Assure que la Sidebar est au-dessus de la Topbar */
+    top: 0;
+    /* Positionnez en haut */
+    left: 0;
+    /* Positionnez sur le côté gauche */
 }
 
-/* Sections */
-section {
-    margin-bottom: 30px;
-}
-
-section h2 {
-    font-size: 1.5rem;
-    color: #4caf50;
-    margin-bottom: 10px;
-}
-
-section p {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: #333;
-}
-
-/* Liens dans les sections */
-ul {
-    list-style: none;
-    padding: 0;
-}
-
-ul li {
-    margin-bottom: 10px;
-}
-
-ul li a {
-    color: #1976d2;
-    text-decoration: none;
-}
-
-ul li a:hover {
-    text-decoration: underline;
-}
-
-/* Liste ordonnée */
-ol {
-    padding-left: 20px;
-    color: #333;
-}
-
-ol li {
-    margin-bottom: 10px;
-}
-
-/* Bouton de téléchargement */
-.upload-btn {
-    background-color: #4caf50;
+.topbar {
+    position: relative;
+    /* Assurez-vous que la Topbar est en dessous */
+    z-index: 999;
+    /* Niveau inférieur à celui de la Sidebar */
+    height: 60px;
+    /* Hauteur fixe de la Topbar */
+    background-color: #1976d2;
     color: white;
-    padding: 12px 24px;
-    border-radius: 25px;
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-}
-
-.upload-btn a {
-    color: white;
-    text-decoration: none;
-}
-
-.upload-btn:hover {
-    background-color: #388e3c;
-    transform: scale(1.05);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
 }

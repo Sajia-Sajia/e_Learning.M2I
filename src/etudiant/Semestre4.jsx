@@ -1,7 +1,7 @@
 import React from "react";
 import Sidebar from "./Sidebar2"; // Import Sidebar
 import Topbar from "../etudiant/topBar"; // Import Topbar
-import "./semestre4.css"; // Ajouter un fichier CSS pour styliser cette section
+import "./semestre4.css"; // Ajouter les styles pour cette section
 
 function Semestre4() {
   return (
@@ -9,13 +9,16 @@ function Semestre4() {
       {/* Topbar */}
       <Topbar />
 
-      {/* Sidebar + Content */}
       <div className="semestre4-main">
-        <Sidebar />
+        {/* Sidebar */}
+        <div className="sidebar">
+          <Sidebar />
+        </div>
+
+        {/* Contenu principal */}
         <div className="semestre4-content">
           <h1 className="semestre4-title">Stages - Semestre 4</h1>
 
-          {/* Introduction */}
           <section className="intro-section">
             <h2>📘 Introduction</h2>
             <p>
@@ -26,7 +29,6 @@ function Semestre4() {
             </p>
           </section>
 
-          {/* Resources Section */}
           <section className="resources-section">
             <h2>📂 Ressources</h2>
             <ul>
@@ -60,7 +62,6 @@ function Semestre4() {
             </ul>
           </section>
 
-          {/* Tasks Section */}
           <section className="tasks-section">
             <h2>📋 Vos tâches pendant le stage</h2>
             <ol>
@@ -70,7 +71,6 @@ function Semestre4() {
             </ol>
           </section>
 
-          {/* Report Submission Section */}
           <section className="report-section">
             <h2>📤 Soumettre votre rapport</h2>
             <p>
@@ -78,7 +78,9 @@ function Semestre4() {
               télécharger votre rapport de stage :
             </p>
             <button className="upload-btn">
-              <a href="/submit-report">Télécharger le rapport</a>
+              <a href="/submit-report" style={{ color: "green" }}>
+                Télécharger le rapport
+              </a>
             </button>
           </section>
         </div>

@@ -1,86 +1,56 @@
-.dashboard-wrapper {
+.semestre4-layout {
     display: flex;
     flex-direction: column;
     height: 100vh;
+    overflow: hidden;
+    /* Évite les débordements */
 }
 
-.dashboard-content {
+.semestre4-main {
     display: flex;
     flex: 1;
 }
 
-.dashboard-sidebar {
+.sidebar {
     width: 250px;
-    background-color: #f4f4f4;
+    background-color: #e6f7f2;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    height: 100vh;
+    z-index: 1000;
 }
 
-.dashboard-main {
+.semestre4-content {
+    margin-left: 250px;
     flex: 1;
     padding: 20px;
+    background-color: #f9f9f9;
     overflow-y: auto;
-}
-
-.table-card {
-    margin-bottom: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding: 0px;
-}
-.dashboard-wrapper {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f4f4f4;
 }
 
-.table-card {
-    width: 900px;
-    min-height: 500px;
-    border-radius: 10px;
-    padding: 0px;
-    background-color: #fff;
-    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
-    border: 1px solid #ddd;
-}
-body {
-    margin: 0;
-    font-family: 'Roboto', sans-serif;
+.semestre4-title {
+    text-align: center;
+    font-size: 2rem;
+    color: #1976d2;
+    margin-bottom: 20px;
 }
 
-.container-fluid {
-    height: 100%;
-    background: linear-gradient(135deg, #229ed7, #057eff);
-}
-
-.table-card {
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.95);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-.action-button {
-    display: inline-flex;
-    align-items: center;
-    background-color: #6c63ff;
-    color: #fff;
+.upload-btn {
+    background-color: #4caf50;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 25px;
     border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
     cursor: pointer;
-    margin-right: 5px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
 }
 
-.icon {
-    margin-right: 5px;
+.upload-btn:hover {
+    background-color: #388e3c;
+    transform: scale(1.05);
 }
