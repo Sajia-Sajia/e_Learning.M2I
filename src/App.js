@@ -16,7 +16,6 @@ import Sidebar from './annonces/Sidebar';
 import Sidebarprof from './pageprof/Sidebarprof';
 import "./annonces/sb-admin-2.min.css";
 import Dashboard from './annonces/Dashboard';
-<<<<<<< HEAD
 import TPList from './pageprof/TPList';
 import TPcreate from './pageprof/TPcreate';
 import TPedit from './pageprof/TPedit';
