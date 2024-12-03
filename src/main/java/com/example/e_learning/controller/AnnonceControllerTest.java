@@ -3,9 +3,12 @@ package com.example.e_learning.controller;
 import com.example.e_learning.model.Annonce;
 import com.example.e_learning.service.AnnonceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
 import java.util.Optional;
@@ -54,5 +57,15 @@ public class AnnonceControllerTest {
     public ResponseEntity<Void> deleteAnnonce(@PathVariable String id) {
         annonceService.deleteAnnonce(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @Configuration
+    public static class FileStorageConfig implements WebMvcConfigurer {
+
+        @Override
+        public void addResourceHandlers(ResourceHandlerRegistry registry) {
+            registry.addResourceHandler("/uploads/**")
+                    .addResourceLocations("file:uploads/");
+        }
     }
 }
