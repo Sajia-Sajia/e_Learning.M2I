@@ -4,20 +4,45 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { Link } from 'react-router-dom';
 import { CiLogout } from "react-icons/ci";
+import { FaBook, FaChalkboard, FaBullhorn, FaRegFileAlt } from 'react-icons/fa';
+import { faFaceLaughWink } from '@fortawesome/free-solid-svg-icons'
+import { faFileAlt } from '@fortawesome/free-solid-svg-icons';
+//import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+
+// Votre thème personnalisé
+/*const demoTheme = extendTheme({
+    config: {
+        initialColorMode: 'light', // Mode par défaut
+        useSystemColorMode: true, // Basculer selon les préférences système
+    },
+});*/
+
 function Topbarprof() {
     return (
+        
         <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
             {/* <!-- Sidebar Toggle (Topbar) --> */}
             <button id="sidebarToggleTop" className="btn btn-link d-md-none rounded-circle mr-3">
                 <FontAwesomeIcon icon={faBars} />
             </button>
 
+            <a className="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+                <img src="/images/logo.png" alt="Logo" style={{ height: '60px' }} />
+            </a>
+
             {/* <!-- Topbar Search --> */}
             <form
-                className="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                <div className="input-group">
-                    <input type="text" className="form-control bg-light border-0 small" placeholder="Rechercher..."
-                        aria-label="Search" aria-describedby="basic-addon2" />
+                className="form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+                style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
+            >
+                <div className="input-group" style={{ width: 'auto' }}>
+                    <input
+                        type="text"
+                        className="form-control bg-light border-0 small"
+                        placeholder="Rechercher..."
+                        aria-label="Search"
+                        aria-describedby="basic-addon2"
+                    />
                     <div className="input-group-append">
                         <button className="btn btn-primary" type="button">
                             <FontAwesomeIcon icon={faSearch} />
@@ -52,6 +77,37 @@ function Topbarprof() {
                         </form>
                     </div>
                 </li>
+                <li className="nav-item dropdown no-arrow">
+                    <Link className="nav-link dropdown-toggle"  to="/portalprof/annonces-list">
+                         <FaBullhorn style={{ marginRight: "0.5rem" }} />
+                         <span>Gérer Annonces</span>
+                    </Link>
+                </li>
+                <li className="nav-item dropdown no-arrow">
+                        <Link className="nav-link dropdown-toggle" to="#" id="userDropdown2" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <FontAwesomeIcon icon={faFileAlt} size="1x" />
+                            <span>Gérer Support</span>
+                        </Link>
+                        {/* <!-- Dropdown - User Information --> */}
+                        <div className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            aria-labelledby="userDropdown">
+                            <a className="dropdown-item" href="/portalprof/cours-list">
+                                <FaBook style={{ marginRight: "0.5rem" }} />
+                                <span>Gérer Cours</span>
+                            </a>
+
+                            <a className="dropdown-item" href="/portalprof/td-list">
+                                <FaRegFileAlt style={{ marginRight: "0.5rem" }} />
+                                <span>Gérer TDs</span>
+                            </a>
+                            <a className="dropdown-item" href="/portalprof/tp-list">
+                                <FaChalkboard style={{ marginRight: "0.5rem" }} />
+                                <span>Gérer TPs</span>
+                            </a>
+                        </div>
+                    </li>
+                    
 
                 <div className="topbar-divider d-none d-sm-block"></div>
 
@@ -80,7 +136,8 @@ function Topbarprof() {
 
             </ul>
 
-        </nav>
+            </nav>
+        
     )
 }
 

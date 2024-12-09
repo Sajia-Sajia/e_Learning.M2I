@@ -2,9 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\pageprof",
-    "\\src\\Pages"
+    "\\src\\pageprof"
   ],
-  "SelectedNode": "\\src\\pageprof\\Topbarprof.js",
+  "SelectedNode": "\\src\\pageprof\\CoursList.js",
   "PreviewInSolutionExplorer": false
 }

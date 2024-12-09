@@ -9,13 +9,13 @@ function TPList() {
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
-        getUsers();
+        getTPs();
         console.log("welcome");
     }, []);
 
-    let getUsers = async () => {
+    let getTPs = async () => {
         try {
-            const response = await axios.get("https://63a9bccb7d7edb3ae616b639.mockapi.io/users"); // Update endpoint if necessary
+            const response = await axios.get("http://localhost:8082/api/supports/type/TP"); // Update endpoint if necessary
             setUserList(response.data);
             setLoading(false);
         } catch (error) {
@@ -25,12 +25,12 @@ function TPList() {
 
     let handleDelete = async (id) => {
         try {
-            const confirmDelete = window.confirm("Êtes-vous sûre de vouloir supprimer cet élément ?");
+            const confirmDelete = window.confirm("Êtes-vous sûre de vouloir supprimer ce TP ?");
             if (confirmDelete) {
                 const confirm = window.confirm("Veuillez confirmer la suppression !");
                 if (confirm) {
-                    await axios.delete(`https://63a9bccb7d7edb3ae616b639.mockapi.io/users/${id}`);
-                    getUsers();
+                    await axios.delete(`http://localhost:8082/api/supports/deleteSupport/${id}`);
+                    getTPs();
                 }
             }
         } catch (error) {
@@ -41,7 +41,7 @@ function TPList() {
     return (
         <>
             <div className="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 className="h3 mb-0 text-gray-800">Les TPs </h1>
+                <h1 className="h3 mb-0 text-gray-800"> </h1>
                 <Link to="/portalprof/create-tp" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                     <FontAwesomeIcon icon={faUser} className="creatinguser mr-2" />
                     Créer TP
@@ -49,7 +49,7 @@ function TPList() {
             </div>
             <div className="card shadow mb-4">
                 <div className="card-header py-3">
-                    <h6 className="m-0 font-weight-bold text-primary">Liste des TPs</h6>
+                    <h6 className="m-0 font-weight-bold text-primary" style={{ fontSize: '20px' }}>Liste des TPs</h6>
                 </div>
                 <div className="card-body">
                     {isLoading ? (
@@ -59,13 +59,13 @@ function TPList() {
                             <table className="table table-bordered" id="dataTable" width="100%" cellSpacing="0">
                                 <thead>
                                     <tr>
-                                        <th>Id</th>
-                                        <th>Titre</th>
-                                        <th>Description</th>
-                                        <th>Date de publication</th>
-                                        <th>Heure de publication</th>
-                                        <th>Module</th>
+                                        <th>IdTP</th>
                                         <th>ID de professeur</th>
+                                        <th>Module</th>
+                                        <th>Semestre</th>
+                                        <th>Description</th>
+                                        <th>CodeClassroom</th>
+                                        <th>Fichier</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -73,12 +73,12 @@ function TPList() {
                                     {userList.map((item) => (
                                         <tr key={item.id}>
                                             <td>{item.id}</td>
-                                            <td>{item.titre}</td>
+                                            <td>{item.idProfesseur}</td>
+                                            <td>{item.nomModule}</td>
+                                            <td>{item.semester}</td>
                                             <td>{item.description}</td>
-                                            <td>{item.date_publication}</td>
-                                            <td>{item.heur_pub}</td>
-                                            <td>{item.module}</td>
-                                            <td>{item.professeurId}</td>
+                                            <th>{item.codeClassroom}</th>
+                                            <td>{item.fichierUrl ? JSON.stringify(item.fichierUrl) : 'Pas de fichier'}</td>
                                             <td>
                                                 <Link to={`/portalprof/tp-edit/${item.id}`} className='btn btn-info btn-sm mr-1'>Edit</Link>
                                                 <button onClick={() => handleDelete(item.id)} className='btn btn-danger btn-sm mr-1'>Delete</button>

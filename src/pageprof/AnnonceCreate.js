@@ -65,38 +65,42 @@ function AnnonceCreate() {
     });
 
     return (
-        <div className='container'>
+        <>
+            <h3>Création d'une annonce : </h3>
+            <div className='container'>
+                <div className="card shadow mb-4">
+                    <div className="card-header py-3">
             <form onSubmit={myFormik.handleSubmit}>
                 <div className='row'>
-                    <div className="col-lg-6">
+                    <div className="col-lg-12">
                         <label>Titre</label>
                         <input name='titre' value={myFormik.values.titre} onChange={myFormik.handleChange} type={"text"}
                             className={`form-control ${myFormik.errors.titre ? "is-invalid" : ""} `} />
                         <span style={{ color: "red" }}>{myFormik.errors.titre}</span>
                     </div>
 
-                    <div className="col-lg-6">
+                    <div className="col-lg-12">
                         <label>Description</label>
                         <textarea name='description' value={myFormik.values.description} onChange={myFormik.handleChange}
                             className={`form-control ${myFormik.errors.description ? "is-invalid" : ""} `}></textarea>
                         <span style={{ color: "red" }}>{myFormik.errors.description}</span>
                     </div>
 
-                    <div className="col-lg-4">
-                        <label>Date de la ublication</label>
+                    <div className="col-lg-12">
+                        <label>Date de la publication</label>
                         <input name='date_publication' value={myFormik.values.date_publication} onChange={myFormik.handleChange} type={"date"}
                             className={`form-control ${myFormik.errors.date_publication ? "is-invalid" : ""} `} />
                         <span style={{ color: "red" }}>{myFormik.errors.date_publication}</span>
                     </div>
 
-                    <div className="col-lg-4">
+                    <div className="col-lg-12">
                         <label>Heure de la publication</label>
                         <input name='heur_pub' value={myFormik.values.heur_pub} onChange={myFormik.handleChange} type={"time"}
                             className={`form-control ${myFormik.errors.heur_pub ? "is-invalid" : ""} `} />
                         <span style={{ color: "red" }}>{myFormik.errors.heur_pub}</span>
                     </div>
 
-                    <div className="col-lg-4">
+                    <div className="col-lg-12">
                         <label>Type</label>
                         <select name='type' value={myFormik.values.type} onChange={myFormik.handleChange}
                             className={`form-control ${myFormik.errors.type ? "is-invalid" : ""} `}>
@@ -108,19 +112,19 @@ function AnnonceCreate() {
                         <span style={{ color: "red" }}>{myFormik.errors.type}</span>
                     </div>
 
-                    <div className="col-lg-4">
+                    <div className="col-lg-12">
                         <label>ID de professeur</label>
                         <input name='auteur_id' value={myFormik.values.auteur_id} onChange={myFormik.handleChange} type={"text"}
                             className={`form-control ${myFormik.errors.auteur_id ? "is-invalid" : ""} `} />
                         <span style={{ color: "red" }}>{myFormik.errors.auteur_id}</span>
                     </div>
 
-                    <div className='col-lg-4 mt-3'>
+                    <div className='col-lg-12 mt-3'>
                         <input disabled={isLoading} type="submit" value={isLoading ? "Submitting..." : "Créer"} className='btn btn-primary' />
                     </div>
                 </div>
-            </form>
-        </div>
+                    </form>
+                </div></div></div></>
     );
 }
 

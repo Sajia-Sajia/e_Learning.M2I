@@ -1,4 +1,4 @@
-import axios from 'axios';
+ï»¿import axios from 'axios';
 import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -55,7 +55,7 @@ function Editannonce() {
             }
 
             if (!values.type) {
-                errors.type = "Veuillez séléctionner le type";
+                errors.type = "Veuillez sÃ©lÃ©ctionner le type";
             }
 
             if (!values.auteur_id) {
@@ -80,43 +80,45 @@ function Editannonce() {
 
     return (
         <>
-            <h3>Modification de l'annonce - Id : {params.id}</h3>
+            <h3>Modification d'annonce - ID : {params.id} </h3>
             <div className='container'>
+                <div className="card shadow mb-4">
+                    <div className="card-header py-3">
                 <form onSubmit={myFormik.handleSubmit}>
                     <div className='row'>
-                        <div className="col-lg-6">
+                        <div className="col-lg-12">
                             <label>Titre</label>
                             <input name='titre' value={myFormik.values.titre} onChange={myFormik.handleChange} type="text"
                                 className={`form-control ${myFormik.errors.titre ? "is-invalid" : ""}`} />
                             <span style={{ color: "red" }}>{myFormik.errors.titre}</span>
                         </div>
 
-                        <div className="col-lg-6">
+                        <div className="col-lg-12">
                             <label>Description</label>
                             <textarea name='description' value={myFormik.values.description} onChange={myFormik.handleChange}
                                 className={`form-control ${myFormik.errors.description ? "is-invalid" : ""}`}></textarea>
                             <span style={{ color: "red" }}>{myFormik.errors.description}</span>
                         </div>
 
-                        <div className="col-lg-4">
+                        <div className="col-lg-12">
                             <label>Date de la publication</label>
                             <input name='date_publication' value={myFormik.values.date_publication} onChange={myFormik.handleChange} type="date"
                                 className={`form-control ${myFormik.errors.date_publication ? "is-invalid" : ""}`} />
                             <span style={{ color: "red" }}>{myFormik.errors.date_publication}</span>
                         </div>
 
-                        <div className="col-lg-4">
+                        <div className="col-lg-12">
                             <label>Heure de la publication</label>
                             <input name='heur_pub' value={myFormik.values.heur_pub} onChange={myFormik.handleChange} type="time"
                                 className={`form-control ${myFormik.errors.heur_pub ? "is-invalid" : ""}`} />
                             <span style={{ color: "red" }}>{myFormik.errors.heur_pub}</span>
                         </div>
 
-                        <div className="col-lg-4">
+                        <div className="col-lg-12">
                             <label>Type</label>
                             <select name='type' value={myFormik.values.type} onChange={myFormik.handleChange}
                                 className={`form-control ${myFormik.errors.type ? "is-invalid" : ""}`}>
-                                <option value="">----Séléctionnez----</option>
+                                <option value="">----SÃ©lÃ©ctionnez----</option>
                                 <option value="news">Nouvelles</option>
                                 <option value="article">Article</option>
                                 <option value="blog">Blog</option>
@@ -124,19 +126,19 @@ function Editannonce() {
                             <span style={{ color: "red" }}>{myFormik.errors.type}</span>
                         </div>
 
-                        <div className="col-lg-4">
+                        <div className="col-lg-12">
                             <label>ID de professeur</label>
                             <input name='auteur_id' value={myFormik.values.auteur_id} onChange={myFormik.handleChange} type="text"
                                 className={`form-control ${myFormik.errors.auteur_id ? "is-invalid" : ""}`} />
                             <span style={{ color: "red" }}>{myFormik.errors.auteur_id}</span>
                         </div>
 
-                        <div className='col-lg-4 mt-3'>
+                        <div className='col-lg-12 mt-3'>
                             <input disabled={isLoading} type="submit" value={isLoading ? "Updating..." : "Modifier"} className='btn btn-primary' />
                         </div>
                     </div>
-                </form>
-            </div>
+                        </form>
+                    </div></div></div>
         </>
     );
 }

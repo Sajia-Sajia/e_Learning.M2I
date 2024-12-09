@@ -116,7 +116,11 @@ const Login = () => {
                             textAlign: 'center',
                             display: 'inline-block'
                         }} >Effacer le formulaire ?</label>
-                        <Link to="/sidebarprof">Connexion Reussie</Link>
+                            <Link to="/sidebarprof">Prof</Link>
+
+                            <Link to="/sidebar">Admin</Link>
+
+                            <Link to="/etudiants">Etud</Link>
 
                         <Link to="/ForgotPassword">Mot de passe oublié ?</Link>
                     </div>
@@ -125,7 +129,7 @@ const Login = () => {
                             <span className="spinner-border spinner-border-sm"></span>
                         )}
                         <span>Se connecter</span></button>
-                    <br /><br />
+                    <br />
                     {message && (
                         <div className="form-group">
                             <div className="alert alert-danger" role="alert">

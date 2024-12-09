@@ -1,124 +1,219 @@
-﻿import axios from 'axios';
-import { useFormik } from 'formik';
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+﻿import axios from "axios";
+import { useFormik } from "formik";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function TPCreate() {
+function TPcreate() {
     const [isLoading, setLoading] = useState(false);
+    const [selectedFile, setSelectedFile] = useState(null); // Stocke le fichier sélectionné
+    const [fileError, setFileError] = useState(""); // Pour gérer les erreurs du fichier
     const navigate = useNavigate();
 
     const myFormik = useFormik({
         initialValues: {
-            titre: "",
+            idProfesseur: "",
             description: "",
-            professeurId: "",
-            module: "",
-            date_publication: "",
-            heur_pub: ""
+            nomModule: "",
+            semester: "",
+            codeClassroom: "",
+            type: "",
+            fichierUrl: "", // Champ pour stocker l'URL du fichier
         },
         validate: (values) => {
             let errors = {};
-
-            if (!values.titre) {
-                errors.titre = "Veuillez entrer le titre";
-            } else if (values.titre.length < 5) {
-                errors.titre = "Le titre ne doit pas comporter moins de 5 lettres.";
-            } else if (values.titre.length > 50) {
-                errors.titre = "Le titre ne doit pas comporter plus de 50 lettres.";
-            }
 
             if (!values.description) {
                 errors.description = "Veuillez entrer la description";
             }
 
-            if (!values.date_publication) {
-                errors.date_publication = "Veuillez entrer la date de la publication";
+            if (!values.semester) {
+                errors.semester = "Veuillez entrer le semestre";
             }
 
-            if (!values.heur_pub) {
-                errors.heur_pub = "Veuillez entrer l'heure de la publication";
+            if (!values.codeClassroom) {
+                errors.codeClassroom = "Veuillez entrer le code de classroom";
             }
 
-            if (!values.module) {
-                errors.module = "Veuillez entrer le module";
+            if (!values.nomModule) {
+                errors.nomModule = "Veuillez entrer le module";
             }
 
-
-            if (!values.professeurId) {
-                errors.professeurId = "Ce champs est obligatoire";
+            if (!values.idProfesseur) {
+                errors.idProfesseur = "Ce champ est obligatoire";
             }
 
+            if (!values.type) {
+                errors.type = "Veuillez sélectionner le type";
+            }
+
+            // Vérification si un fichier est sélectionné
+            if (!selectedFile) {
+                setFileError("Veuillez sélectionner un fichier");
+            } else {
+                setFileError(""); // Réinitialiser l'erreur si un fichier est sélectionné
+            }
 
             return errors;
         },
         onSubmit: async (values) => {
             try {
                 setLoading(true);
-                await axios.post("https://63a9bccb7d7edb3ae616b639.mockapi.io/users", values);
+
+                // Étape 1 : Téléchargement du fichier
+                let fileUrl = "";
+                if (selectedFile) {
+                    const formData = new FormData();
+                    formData.append("file", selectedFile);
+
+                    const fileUploadResponse = await axios.post(
+                        "http://localhost:8082/api/files/upload",
+                        formData,
+                        {
+                            headers: {
+                                "Content-Type": "multipart/form-data",
+                            },
+                        }
+                    );
+
+                    fileUrl = fileUploadResponse.data; // URL du fichier renvoyée par l'API
+                }
+
+                // Étape 2 : Ajout de l'URL du fichier aux données du formulaire
+                values.fichierUrl = fileUrl;
+
+                // Étape 3 : Enregistrement des données du support
+                await axios.post("http://localhost:8082/api/supports/saveSupport", values);
                 navigate("/portalprof/tp-list");
             } catch (error) {
-                console.log(error);
-                alert("Échec de la validation");
+                console.error(error);
+                alert("Échec de la création de TP");
+            } finally {
                 setLoading(false);
             }
-
-            console.log(values);
-        }
+        },
     });
 
+    // Gestion du changement de fichier
+    const handleFileChange = (event) => {
+        setSelectedFile(event.target.files[0]);
+        setFileError(""); // Réinitialiser l'erreur lors de la sélection d'un fichier
+    };
+
     return (
-        <div className='container'>
-            <form onSubmit={myFormik.handleSubmit}>
-                <div className='row'>
-                    <div className="col-lg-6">
-                        <label>Titre</label>
-                        <input name='titre' value={myFormik.values.titre} onChange={myFormik.handleChange} type={"text"}
-                            className={`form-control ${myFormik.errors.titre ? "is-invalid" : ""} `} />
-                        <span style={{ color: "red" }}>{myFormik.errors.titre}</span>
-                    </div>
+        <>
+            <h3>Création de TP :</h3>
+            <div className="container">
+                <div className="card shadow mb-4">
+                    <div className="card-header py-3">
+                        <form onSubmit={myFormik.handleSubmit}>
+                            <div className="row">
+                                <div className="col-lg-12">
+                                    <label>Id Professeur</label>
+                                    <input
+                                        name="idProfesseur"
+                                        value={myFormik.values.idProfesseur}
+                                        onChange={myFormik.handleChange}
+                                        type="text"
+                                        className={`form-control ${myFormik.errors.idProfesseur ? "is-invalid" : ""
+                                            } `}
+                                    />
+                                    <span style={{ color: "red" }}>{myFormik.errors.idProfesseur}</span>
+                                </div>
 
-                    <div className="col-lg-6">
-                        <label>Description</label>
-                        <textarea name='description' value={myFormik.values.description} onChange={myFormik.handleChange}
-                            className={`form-control ${myFormik.errors.description ? "is-invalid" : ""} `}></textarea>
-                        <span style={{ color: "red" }}>{myFormik.errors.description}</span>
-                    </div>
+                                <div className="col-lg-12">
+                                    <label>Description</label>
+                                    <textarea
+                                        name="description"
+                                        value={myFormik.values.description}
+                                        onChange={myFormik.handleChange}
+                                        className={`form-control ${myFormik.errors.description ? "is-invalid" : ""
+                                            } `}
+                                    ></textarea>
+                                    <span style={{ color: "red" }}>{myFormik.errors.description}</span>
+                                </div>
 
-                    <div className="col-lg-4">
-                        <label>Date de la publication</label>
-                        <input name='date_publication' value={myFormik.values.date_publication} onChange={myFormik.handleChange} type={"date"}
-                            className={`form-control ${myFormik.errors.date_publication ? "is-invalid" : ""} `} />
-                        <span style={{ color: "red" }}>{myFormik.errors.date_publication}</span>
-                    </div>
+                                <div className="col-lg-12">
+                                    <label>Module</label>
+                                    <input
+                                        name="nomModule"
+                                        value={myFormik.values.nomModule}
+                                        onChange={myFormik.handleChange}
+                                        type="text"
+                                        className={`form-control ${myFormik.errors.nomModule ? "is-invalid" : ""
+                                            } `}
+                                    />
+                                    <span style={{ color: "red" }}>{myFormik.errors.nomModule}</span>
+                                </div>
+                                <div className="col-lg-12">
+                                    <label>Semestre</label>
+                                    <select
+                                        name="semester"
+                                        value={myFormik.values.semester}
+                                        onChange={myFormik.handleChange}
+                                        className={`form-control ${myFormik.errors.semester ? "is-invalid" : ""}`}
+                                    >
+                                        <option value="">----Sélectionnez----</option>
+                                        <option value="S1">S1</option>
+                                        <option value="S2">S2</option>
+                                        <option value="S3">S3</option>
+                                    </select>
+                                    <div className="invalid-feedback">{myFormik.errors.semester}</div>
+                                </div>
 
-                    <div className="col-lg-4">
-                        <label>Heure de la publication</label>
-                        <input name='heur_pub' value={myFormik.values.heur_pub} onChange={myFormik.handleChange} type={"time"}
-                            className={`form-control ${myFormik.errors.heur_pub ? "is-invalid" : ""} `} />
-                        <span style={{ color: "red" }}>{myFormik.errors.heur_pub}</span>
-                    </div>
+                                <div className="col-lg-12">
+                                    <label>Code Classroom</label>
+                                    <input
+                                        name="codeClassroom"
+                                        value={myFormik.values.codeClassroom}
+                                        onChange={myFormik.handleChange}
+                                        type="text"
+                                        className={`form-control ${myFormik.errors.codeClassroom ? "is-invalid" : ""
+                                            } `}
+                                    />
+                                    <span style={{ color: "red" }}>{myFormik.errors.codeClassroom}</span>
+                                </div>
 
-                    <div className="col-lg-4">
-                        <label>Module</label>
-                        <input name='module' value={myFormik.values.module} onChange={myFormik.handleChange} type={"text"}
-                            className={`form-control ${myFormik.errors.module ? "is-invalid" : ""} `} />
-                        <span style={{ color: "red" }}>{myFormik.errors.module}</span>
-                    </div>
+                                <div className="col-lg-12">
+                                    <label>Type</label>
+                                    <select
+                                        name="type"
+                                        value={myFormik.values.type}
+                                        onChange={myFormik.handleChange}
+                                        className={`form-control ${myFormik.errors.type ? "is-invalid" : ""
+                                            } `}
+                                    >
+                                        <option value="">----Sélectionnez----</option>
+                                        <option value="COUR">COUR</option>
+                                        <option value="TP">TP</option>
+                                        <option value="TD">TD</option>
+                                    </select>  
+                                </div>
 
-                    <div className="col-lg-4">
-                        <label>Professeur Id</label>
-                        <input name='professeurId' value={myFormik.values.professeurId} onChange={myFormik.handleChange} type={"text"}
-                            className={`form-control ${myFormik.errors.professeurId ? "is-invalid" : ""} `} />
-                        <span style={{ color: "red" }}>{myFormik.errors.professeurId}</span>
-                    </div>
+                                <div className="col-lg-12">
+                                    <label>Fichier</label>
+                                    <input
+                                        type="file"
+                                        onChange={handleFileChange}
+                                        className={`form-control ${fileError ? "is-invalid" : ""}`}
+                                    />
+                                    <div style={{ color: "red" }}>{fileError}</div>
+                                </div>
 
-                    <div className='col-lg-4 mt-3'>
-                        <input disabled={isLoading} type="submit" value={isLoading ? "Submitting..." : "Créer"} className='btn btn-primary' />
+                                <div className="col-lg-12 mt-3">
+                                    <input
+                                        disabled={isLoading}
+                                        type="submit"
+                                        value={isLoading ? "En cours..." : "Créer"}
+                                        className="btn btn-primary"
+                                    />
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
-            </form>
-        </div>
+            </div>
+        </>
     );
 }
 
-export default TPCreate;
+export default TPcreate;

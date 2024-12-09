@@ -41,7 +41,7 @@ function AnnoncesList() {
     return (
         <>
             <div className="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 className="h3 mb-0 text-gray-800">Les Annonces </h1>
+                <h1 className="h3 mb-0 text-gray-800"> </h1>
                 <Link to="/portalprof/create-annonce" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                     <FontAwesomeIcon icon={faUser} className="creatinguser mr-2" />
                     Créer Annonce
@@ -49,7 +49,7 @@ function AnnoncesList() {
             </div>
             <div className="card shadow mb-4">
                 <div className="card-header py-3">
-                    <h6 className="m-0 font-weight-bold text-primary">Liste des annonces</h6>
+                    <h6 className="m-0 font-weight-bold text-primary" style={{ fontSize: '20px' }}>Liste des annonces</h6>
                 </div>
                 <div className="card-body">
                     {isLoading ? (
