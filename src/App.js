@@ -34,6 +34,8 @@ import Semestre2 from './etudiant/Semestre2';
 import Semestre4 from './etudiant/Semestre4';
 import Semestre3 from './etudiant/Semestre3';
 import Quiz from './etudiant/Quiz';
+import HomeProf from './pageprof/HomeProf';
+import ProfileProf from './pageprof/ProfileProf';
 
 function App() {
     return (
@@ -46,6 +48,8 @@ function App() {
                 <Route path="/ForgotPassword" element={<ForgotPassword />} />
                 <Route path="/Reset" element={<Reset />} />
                 <Route path='/sidebar' element={<Sidebar />} />
+                <Route path="/HomeProf" element={<HomeProf />} />
+                <Route path="/ProfileProf" element={<ProfileProf />} />
                 <Route path="/portal" element={<Portal />}>
                     <Route path='dashboard' element={<Dashboard />} />
                     <Route path='user-list' element={<Userlist />} />

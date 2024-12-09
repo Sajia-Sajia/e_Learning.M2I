@@ -1,12 +1,14 @@
-import { faUser } from '@fortawesome/free-regular-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Searchbar from './Searchbar';
 
 function TPList() {
     const [userList, setUserList] = useState([]);
     const [isLoading, setLoading] = useState(true);
+    const { searchComponent, filteredData } = Searchbar({ initialData: userList });
 
     useEffect(() => {
         getTPs();
@@ -42,10 +44,18 @@ function TPList() {
         <>
             <div className="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 className="h3 mb-0 text-gray-800"> </h1>
-                <Link to="/portalprof/create-tp" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                    <FontAwesomeIcon icon={faUser} className="creatinguser mr-2" />
+                <div className="d-flex align-items-center gap-2">
+                    {!isLoading && searchComponent}
+                    <Link to="/portalprof/create-tp" className="btn btn-sm btn-primary shadow-sm" style={{
+                        marginLeft: '10px', height: '38px',
+                        lineHeight: '24px',
+                        display: 'inline-flex',
+                        alignItems: 'center'
+                    }} >
+                    <FontAwesomeIcon icon={faPlus} className="creatinguser mr-2" />
                     Créer TP
-                </Link>
+                    </Link>
+                </div>
             </div>
             <div className="card shadow mb-4">
                 <div className="card-header py-3">
@@ -70,7 +80,7 @@ function TPList() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {userList.map((item) => (
+                                        {filteredData.map((item) => (
                                         <tr key={item.id}>
                                             <td>{item.id}</td>
                                             <td>{item.idProfesseur}</td>
