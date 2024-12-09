@@ -16,19 +16,19 @@ const ChatBot = () => {
 
     const userMessage = { sender: 'user', text: input };
     setMessages((prevMessages) => [...prevMessages, userMessage]);
+    setInput(''); // Effacer le champ immédiatement
     setConversationStarted(true);
 
     try {
       const response = await fetch('http://localhost:5000/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: input }),
+        body: JSON.stringify({ message: userMessage.text }),
       });
 
       const data = await response.json();
       const botMessage = { sender: 'bot', text: data.response };
       setMessages((prevMessages) => [...prevMessages, botMessage]);
-      setInput('');
     } catch (error) {
       console.error('Error:', error);
     }
@@ -65,7 +65,10 @@ const ChatBot = () => {
       <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
         <ChatBubbleOutlineIcon sx={{ fontSize: '50px', color: '#3f51b5' }} />
         <Box sx={{ marginLeft: '10px', fontSize: '18px', fontWeight: 'bold', color: '#3f51b5' }}>
-          Bonjour, comment puis-je vous aider ?
+          Bonjour, comment puis-je vous aider ?{' '}
+          <span role="img" aria-label="help" style={{ fontSize: '22px' }}>
+            🙋‍♂️👋
+          </span>
         </Box>
       </Box>
 
@@ -84,13 +87,17 @@ const ChatBot = () => {
             <div key={index} style={{ textAlign: msg.sender === 'user' ? 'right' : 'left', margin: '5px 0' }}>
               <strong style={{ color: msg.sender === 'user' ? '#3f51b5' : '#f44336' }}>
                 {msg.sender === 'user' ? 'Vous' : 'Bot'}:
-              </strong> {msg.text}
+              </strong>{' '}
+              {msg.text}
             </div>
           ))}
         </Box>
       )}
 
-      <form onSubmit={handleSend} style={{ display: 'flex', alignItems: 'center' }}>
+      <form
+        onSubmit={handleSend}
+        style={{ display: 'flex', alignItems: 'center' }}
+      >
         <input
           type="text"
           value={input}
@@ -107,23 +114,26 @@ const ChatBot = () => {
             color: isDarkMode ? '#fff' : '#000',
           }}
         />
-        <button type="submit" style={{
-          backgroundColor: '#3f51b5',
-          color: 'white',
-          borderRadius: '50%',
-          width: '40px',
-          height: '40px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          border: 'none',
-          cursor: 'pointer',
-        }}>
+        <button
+          type="submit"
+          style={{
+            backgroundColor: '#3f51b5',
+            color: 'white',
+            borderRadius: '50%',
+            width: '40px',
+            height: '40px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            border: 'none',
+            cursor: 'pointer',
+          }}
+        >
           <SendIcon />
         </button>
       </form>
     </Box>
   );
-};
+}; 
 
 export default ChatBot;

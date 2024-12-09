@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Searchbar from './Searchbar'; 
 
 function TDList() {
     const [userList, setUserList] = useState([]);
@@ -38,14 +39,19 @@ function TDList() {
         }
     };
 
+    const { searchComponent, filteredData } = Searchbar({ initialData: userList });
+
     return (
         <>
             <div className="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 className="h3 mb-0 text-gray-800">Les TDs </h1>
+                 <div className="d-flex align-items-center gap-2">
+                    {searchComponent}
                 <Link to="/portalprof/create-td" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                     <FontAwesomeIcon icon={faUser} className="creatinguser mr-2" />
                     Créer TD
                 </Link>
+                </div>
             </div>
             <div className="card shadow mb-4">
                 <div className="card-header py-3">
@@ -70,22 +76,22 @@ function TDList() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {userList.map((item) => (
-                                        <tr key={item.id}>
-                                            <td>{item.id}</td>
-                                            <td>{item.titre}</td>
-                                            <td>{item.description}</td>
-                                            <td>{item.date_publication}</td>
-                                            <td>{item.heur_pub}</td>
-                                            <td>{item.module}</td>
-                                            <td>{item.professeurId}</td>
-                                            <td>
-                                                <Link to={`/portalprof/td-edit/${item.id}`} className='btn btn-info btn-sm mr-1'>Edit</Link>
-                                                <button onClick={() => handleDelete(item.id)} className='btn btn-danger btn-sm mr-1'>Delete</button>
-                                            </td>
-                                        </tr>
+                                    {filteredData.map((item) => (
+                                    <tr key={item.id}>
+                                        <td>{item.id}</td>
+                                        <td>{item.titre}</td>
+                                        <td>{item.description}</td>
+                                        <td>{item.date_publication}</td>
+                                        <td>{item.heur_pub}</td>
+                                        <td>{item.module}</td>
+                                        <td>{item.professeurId}</td>
+                                        <td>
+                                        <Link to={`/portalprof/td-edit/${item.id}`} className='btn btn-info btn-sm mr-1'>Edit</Link>
+                                        <button onClick={() => handleDelete(item.id)} className='btn btn-danger btn-sm mr-1'>Delete</button>
+                                        </td>
+                                    </tr>
                                     ))}
-                                </tbody>
+                                    </tbody>
                             </table>
                         </div>
                     )}

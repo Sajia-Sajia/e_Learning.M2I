@@ -7,6 +7,11 @@ import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 import emailjs from 'emailjs-com';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import { Link, useNavigate } from 'react-router-dom';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import WorkIcon from '@mui/icons-material/Work';
+import SchoolIcon from '@mui/icons-material/School';
+import LanguageIcon from '@mui/icons-material/Language';
+
 
 const Header = ({ showSemester }) => {
     const [anchorElProgram, setAnchorElProgram] = useState(null);
@@ -99,21 +104,39 @@ const Header = ({ showSemester }) => {
                             Programme
                         </Button>
 
-                        <Button sx={{ margin: '0 10px', color: 'black' }} onClick={handleOpportuniteOpen}>
-                        <BusinessCenterIcon sx={{ marginRight: '5px', color: 'rgba(128, 128, 128, 0.5)' }} />
-                           Opportunités de Carrière
-                         </Button>
+                         <div>
+                        <Button sx={{ margin: '0 10px', color: 'black',}} onClick={handleOpportuniteOpen}>
+                            <BusinessCenterIcon sx={{ marginRight: '5px', color: 'rgba(128, 128, 128, 0.5)' }} />
+                            Opportunités de Carrière
+                        </Button>
                         <Menu
-                           anchorEl={anchorElOpportunite}
-                           open={Boolean(anchorElOpportunite)}
-                           onClose={handleOpportuniteClose}
-      >
-                        <MenuItem onClick={() => window.open('https://www.linkedin.com', '_blank')}>LinkedIn</MenuItem>
-                        <MenuItem onClick={() => window.open('https://www.indeed.com', '_blank')}>Indeed</MenuItem>
-                        <MenuItem onClick={() => window.open('https://www.allmyjobs.com', '_blank')}>AllMyAlert</MenuItem>
-                        <MenuItem onClick={() => window.open('https://www.edx.org', '_blank')}>edX</MenuItem>
-                        <MenuItem onClick={() => window.open('https://www.coursera.org', '_blank')}>Coursera</MenuItem>
+                        anchorEl={anchorElOpportunite}
+                        open={Boolean(anchorElOpportunite)}
+                        onClose={handleOpportuniteClose}
+                        sx={{ backgroundColor: 'rgba(0, 123, 255, 0.1)' }} // Bleu transparent
+                        >
+                        <MenuItem onClick={() => window.open('https://www.linkedin.com', '_blank')} sx={{ display: 'flex', alignItems: 'center',}}>
+                           <LinkedInIcon sx={{ marginRight: '10px', color: '#0077b5', fontSize: '24px' }} />
+                            LinkedIn
+                        </MenuItem>
+                           <MenuItem onClick={() => window.open('https://www.indeed.com', '_blank')} sx={{ display: 'flex', alignItems: 'center' }}>
+                            <img src="/images/indeed.png" alt="Indeed" style={{ width: '20px', marginRight: '10px' }} />
+                            Indeed
+                        </MenuItem>
+                           <MenuItem onClick={() => window.open('https://myjobalert.ma/', '_blank')} sx={{ display: 'flex', alignItems: 'center' }}>
+                            <img src="/images/mjaLogo-nbg.png" alt="MyJobAlert" style={{ width: '29px', marginRight: '10px' }} />
+                            MyJobAlert
+                        </MenuItem>
+                            <MenuItem onClick={() => window.open('https://www.edx.org', '_blank')} sx={{ display: 'flex', alignItems: 'center' }}>
+                            <img src="/images/edx.png" alt="edX" style={{ width: '24px', marginRight: '10px' }} />
+                            edX
+                        </MenuItem>
+                            <MenuItem onClick={() => window.open('https://www.coursera.org', '_blank')} sx={{ display: 'flex', alignItems: 'center' }}>
+                            <img src="/images/LG2.png" alt="Coursera" style={{ width: '24px', marginRight: '10px' }} />
+                            Coursera
+                        </MenuItem>
                         </Menu>
+                        </div>
 
                         <Button sx={{ margin: '0 10px', color: 'black' }} onClick={handleOpenContactForm}>
                             <MailOutlineIcon sx={{ marginRight: '5px', color: 'rgba(128, 128, 128, 0.5)' }} />

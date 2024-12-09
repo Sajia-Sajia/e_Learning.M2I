@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Searchbar from './Searchbar';
 
 function AnnoncesList() {
     const [userList, setUserList] = useState([]);
@@ -15,7 +16,7 @@ function AnnoncesList() {
 
     let getUsers = async () => {
         try {
-            const response = await axios.get("https://63a9bccb7d7edb3ae616b639.mockapi.io/users"); // Update endpoint if necessary
+            const response = await axios.get("https://63a9bccb7d7edb3ae616b639.mockapi.io/users");
             setUserList(response.data);
             setLoading(false);
         } catch (error) {
@@ -38,14 +39,19 @@ function AnnoncesList() {
         }
     };
 
+    const { searchComponent, filteredData } = Searchbar({ initialData: userList });
+
     return (
         <>
             <div className="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 className="h3 mb-0 text-gray-800">Les Annonces </h1>
-                <Link to="/portalprof/create-annonce" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                    <FontAwesomeIcon icon={faUser} className="creatinguser mr-2" />
-                    Créer Annonce
-                </Link>
+                <h1 className="h3 mb-0 text-gray-800">Les Annonces</h1>
+                <div className="d-flex align-items-center gap-2">
+                    {searchComponent}
+                    <Link to="/portalprof/create-cour" className="btn btn-sm btn-primary shadow-sm" style={{ marginLeft: '10px' ,height: '38px', lineHeight: '24px', display: 'inline-flex', alignItems: 'center'       }}   >       
+                        <FontAwesomeIcon icon={faUser} className="creatinguser mr-2" />
+                            Créer Annonce
+                    </Link>
+                </div>
             </div>
             <div className="card shadow mb-4">
                 <div className="card-header py-3">
@@ -70,7 +76,7 @@ function AnnoncesList() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {userList.map((item) => (
+                                    {filteredData.map((item) => (
                                         <tr key={item.id}>
                                             <td>{item.id}</td>
                                             <td>{item.titre}</td>

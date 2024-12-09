@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Searchbar from './Searchbar'; 
 
 function TPList() {
     const [userList, setUserList] = useState([]);
@@ -37,15 +38,19 @@ function TPList() {
             console.log(error);
         }
     };
+    const { searchComponent, filteredData } = Searchbar({ initialData: userList });
 
     return (
         <>
             <div className="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 className="h3 mb-0 text-gray-800">Les TPs </h1>
+                <div className="d-flex align-items-center gap-2">
+                {searchComponent}
                 <Link to="/portalprof/create-tp" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                     <FontAwesomeIcon icon={faUser} className="creatinguser mr-2" />
                     Créer TP
                 </Link>
+                </div>
             </div>
             <div className="card shadow mb-4">
                 <div className="card-header py-3">
@@ -70,8 +75,8 @@ function TPList() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {userList.map((item) => (
-                                        <tr key={item.id}>
+                                        {filteredData.map((item) => (
+                                            <tr key={item.id}>
                                             <td>{item.id}</td>
                                             <td>{item.titre}</td>
                                             <td>{item.description}</td>
@@ -83,9 +88,9 @@ function TPList() {
                                                 <Link to={`/portalprof/tp-edit/${item.id}`} className='btn btn-info btn-sm mr-1'>Edit</Link>
                                                 <button onClick={() => handleDelete(item.id)} className='btn btn-danger btn-sm mr-1'>Delete</button>
                                             </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
+                                            </tr>
+                                        ))}
+                                        </tbody>
                             </table>
                         </div>
                     )}
