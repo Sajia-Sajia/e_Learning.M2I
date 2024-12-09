@@ -1,6 +1,5 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import Sidebarprof from './Sidebarprof'
 import Topbarprof from './Topbarprof'
 import './Fich.css';
 import 'bootstrap/dist/css/bootstrap.min.css';

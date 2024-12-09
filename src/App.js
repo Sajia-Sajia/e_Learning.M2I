@@ -14,7 +14,6 @@ import UserCreate from './annonces/UserCreate';
 import UserView from './annonces/UserView';
 import UserEdit from './annonces/UserEdit';
 import Sidebar from './annonces/Sidebar';
-import Sidebarprof from './pageprof/Sidebarprof';
 import "./annonces/sb-admin-2.min.css";
 import Dashboard from './annonces/Dashboard';
 import TPList from './pageprof/TPList';
@@ -47,7 +46,6 @@ function App() {
                 <Route path="/ForgotPassword" element={<ForgotPassword />} />
                 <Route path="/Reset" element={<Reset />} />
                 <Route path='/sidebar' element={<Sidebar />} />
-                <Route path='/sidebarprof' element={<Sidebarprof />} />
                 <Route path="/portal" element={<Portal />}>
                     <Route path='dashboard' element={<Dashboard />} />
                     <Route path='user-list' element={<Userlist />} />

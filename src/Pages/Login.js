@@ -116,7 +116,7 @@ const Login = () => {
                             textAlign: 'center',
                             display: 'inline-block'
                         }} >Effacer le formulaire ?</label>
-                            <Link to="/sidebarprof">Prof</Link>
+                            <Link to="/portalprof">Prof</Link>
 
                             <Link to="/sidebar">Admin</Link>
 
