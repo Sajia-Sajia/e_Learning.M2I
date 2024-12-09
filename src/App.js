@@ -34,6 +34,8 @@ import Semestre2 from './etudiant/Semestre2';
 import Semestre4 from './etudiant/Semestre4';
 import Semestre3 from './etudiant/Semestre3';
 import Quiz from './etudiant/Quiz';
+import ProfileAdmin from "./annonces/ProfileAdmin";
+
 
 function App() {
     return (
@@ -47,6 +49,7 @@ function App() {
                 <Route path="/Reset" element={<Reset />} />
                 <Route path='/sidebar' element={<Sidebar />} />
                 <Route path="/portal" element={<Portal />}>
+                <Route path="/portal/ProfileAdmin" element={<ProfileAdmin />} />
                     <Route path='dashboard' element={<Dashboard />} />
                     <Route path='user-list' element={<Userlist />} />
                     <Route path='create-user' element={<UserCreate />} />

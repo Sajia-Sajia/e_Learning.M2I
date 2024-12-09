@@ -1,0 +1,28 @@
+/* Dashboard.css */
+.container {
+    padding: 20px;
+}
+
+.profile-header {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.profile-header h1 {
+    margin: 0;
+}
+
+.profile-header h5 {
+    color: gray;
+}
+
+.profile-actions {
+    margin-top: 10px;
+}
+
+.profile-actions .btn {
+    margin: 0 5px;
+}
