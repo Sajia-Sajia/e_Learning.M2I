@@ -20,7 +20,7 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/api/supports")
-//@CrossOrigin(origins = "http://localhost:3000") // Permettre les requêtes du front-end (React) si activé
+@CrossOrigin(origins = "http://localhost:3000") // Permettre les requêtes du front-end (React) si activé
 public class SupportController {
 
     // Injection du service pour gérer la logique métier

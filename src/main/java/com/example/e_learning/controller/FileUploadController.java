@@ -16,7 +16,7 @@ rachid
  */
 @RestController
 @RequestMapping("/api/files")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3000")
 public class FileUploadController {
 
     private static final String UPLOAD_DIR = "uploads/";
