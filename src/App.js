@@ -26,7 +26,7 @@ import Listmodule from "./annonces/modules/Listmodule";
 import Editmodule from "./annonces/modules/Editmodule";
 import Createmodule from "./annonces/modules/Createmodule";
 
-
+import ProfileAdmin from "./annonces/ProfileAdmin"
 
 
 
@@ -51,6 +51,7 @@ function App() {
                     <Route path='createmodule' element={<Createmodule />} />
                     <Route path='editmodule' element={<Editmodule />} />
                     <Route path='listmodule' element={<Listmodule/>} />
+                    <Route path='ProfileAdmin' element={<ProfileAdmin/>} />
 
 
 
