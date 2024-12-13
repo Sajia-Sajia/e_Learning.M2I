@@ -3,8 +3,10 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 function Listmodule() {
-  const [modules, setModules] = useState([]);
-  const [isLoading, setLoading] = useState(true);
+  const [modules, setModules] = useState([]); // Liste complète des modules
+  const [filteredModules, setFilteredModules] = useState([]); // Liste filtrée des modules
+  const [isLoading, setLoading] = useState(true); // Indicateur de chargement
+  const [searchTerm, setSearchTerm] = useState(""); // Terme de recherche
 
   useEffect(() => {
     fetchModules();
@@ -12,8 +14,9 @@ function Listmodule() {
 
   const fetchModules = async () => {
     try {
-      const response = await axios.get("http://localhost:8085/api/modules");
+      const response = await axios.get("http://localhost:8082/api/modules");
       setModules(response.data);
+      setFilteredModules(response.data); // Initialise la liste filtrée
       setLoading(false);
     } catch (error) {
       console.error("Erreur lors de la récupération des modules :", error);
@@ -32,12 +35,31 @@ function Listmodule() {
     }
   };
 
+  // Filtrage des modules en fonction du terme de recherche
+  const handleSearch = (term) => {
+    setSearchTerm(term);
+    const filtered = modules.filter((module) =>
+      module.nom.toLowerCase().includes(term.toLowerCase())
+    );
+    setFilteredModules(filtered);
+  };
+
   return (
     <div className="container">
       <h3>Liste des Modules</h3>
       <Link to="/portal/createmodule" className="btn btn-primary mb-3">
         Ajouter un Module
       </Link>
+      {/* Barre de recherche */}
+      <div className="mb-3">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Rechercher par Nom"
+          value={searchTerm}
+          onChange={(e) => handleSearch(e.target.value)}
+        />
+      </div>
       {isLoading ? (
         <p>Chargement...</p>
       ) : (
@@ -51,7 +73,7 @@ function Listmodule() {
             </tr>
           </thead>
           <tbody>
-            {modules.map((module) => (
+            {filteredModules.map((module) => (
               <tr key={module.id}>
                 <td>{module.id}</td>
                 <td>{module.nom}</td>

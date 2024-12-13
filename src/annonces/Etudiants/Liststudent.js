@@ -6,7 +6,10 @@ import { Link } from "react-router-dom";
 
 function Liststudent() {
   const [studentList, setStudentList] = useState([]); // Liste des étudiants
+  const [filteredStudents, setFilteredStudents] = useState([]); // Liste filtrée
   const [isLoading, setLoading] = useState(true); // Indicateur de chargement
+
+  const [searchTerm, setSearchTerm] = useState(''); // Champ unique pour la recherche
 
   useEffect(() => {
     getStudents();
@@ -15,12 +18,25 @@ function Liststudent() {
   // Récupération de la liste des étudiants via l'API
   const getStudents = async () => {
     try {
-      const response = await axios.get("http://localhost:8085/etudiants"); // Endpoint back-end
+      //modifier par nabil 
+      const response = await axios.get("http://localhost:8082/etudiants"); // Endpoint back-end
       setStudentList(response.data); // Mise à jour de la liste des étudiants
+      setFilteredStudents(response.data); // Initialise avec toutes les données
       setLoading(false); // Fin du chargement
     } catch (error) {
       console.error("Erreur lors de la récupération des étudiants :", error);
     }
+  };
+
+  // Fonction pour filtrer la liste selon le terme de recherche
+  const handleSearch = (term) => {
+    const filtered = studentList.filter(student => 
+      student.nom.toLowerCase().includes(term.toLowerCase()) ||
+      student.prenom.toLowerCase().includes(term.toLowerCase()) ||
+      student.cne.toLowerCase().includes(term.toLowerCase()) ||
+      student.cin.toLowerCase().includes(term.toLowerCase())
+    );
+    setFilteredStudents(filtered);
   };
 
   // Suppression d'un étudiant
@@ -50,6 +66,19 @@ function Liststudent() {
           <h6 className="m-0 font-weight-bold text-primary">Liste des étudiants</h6>
         </div>
         <div className="card-body">
+          {/* Barre de recherche unique */}
+          <div className="mb-3">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Rechercher par Nom, Prénom, CNE ou CIN"
+              value={searchTerm}
+              onChange={(e) => {
+                setSearchTerm(e.target.value); 
+                handleSearch(e.target.value);
+              }}
+            />
+          </div>
           {isLoading ? (
             <img src="https://media.giphy.com/media/ZO9b1ntYVJmjZlsWlm/giphy.gif" alt="Loading" />
           ) : (
@@ -80,7 +109,7 @@ function Liststudent() {
                   </tr>
                 </tfoot>
                 <tbody>
-                  {studentList.map((student) => (
+                  {filteredStudents.map((student) => (
                     <tr key={student.id}>
                       <td>{student.id}</td>
                       <td>{student.nom}</td>

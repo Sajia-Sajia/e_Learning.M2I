@@ -7,6 +7,7 @@ import axios from 'axios';
 function Userlist() {
   const [userList, setUserList] = useState([]);
   const [isLoading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState(''); // État pour la recherche
 
   // Fonction pour récupérer les annonces depuis l'API
   useEffect(() => {
@@ -15,7 +16,8 @@ function Userlist() {
 
   const getUsers = async () => {
     try {
-      const response = await axios.get("http://localhost:8085/Annonce"); // URL du backend
+      //modifier par nabil 8082
+      const response = await axios.get("http://localhost:8082/Annonce"); // URL du backend
       setUserList(response.data); // Stocke les données renvoyées par l'API
       setLoading(false); // Arrête l'affichage du loader
     } catch (error) {
@@ -36,6 +38,11 @@ function Userlist() {
     }
   };
 
+  // Filtrer les annonces en fonction de la recherche
+  const filteredUsers = userList.filter(user =>
+    user.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <>
       <div className="d-sm-flex align-items-center justify-content-between mb-4">
@@ -50,6 +57,16 @@ function Userlist() {
           <h6 className="m-0 font-weight-bold text-primary">Liste des annonces</h6>
         </div>
         <div className="card-body">
+          {/* Barre de recherche */}
+          <div className="mb-3">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Rechercher par titre..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
           {isLoading ? (
             <img src='https://media.giphy.com/media/ZO9b1ntYVJmjZlsWlm/giphy.gif' alt="Chargement..." />
           ) : (
@@ -80,7 +97,7 @@ function Userlist() {
                   </tr>
                 </tfoot>
                 <tbody>
-                  {userList.map((item) => (
+                  {filteredUsers.map((item) => (
                     <tr key={item.id}>
                       <td>{item.id}</td>
                       <td>{item.title}</td>
