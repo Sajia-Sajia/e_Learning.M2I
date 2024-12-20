@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "ExpandedNodes": [
     "",
@@ -9,4 +10,17 @@
   ],
   "SelectedNode": "\\src\\annonces\\Portal.js",
   "PreviewInSolutionExplorer": false
+=======
+{
+  "ExpandedNodes": [
+    "",
+    "\\public",
+    "\\src",
+    "\\src\\annonces",
+    "\\src\\components",
+    "\\src\\Pages"
+  ],
+  "SelectedNode": "\\src\\annonces\\Portal.js",
+  "PreviewInSolutionExplorer": false
+>>>>>>> c76881e (premier commit)
 }

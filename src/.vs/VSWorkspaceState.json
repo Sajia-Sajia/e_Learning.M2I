@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "ExpandedNodes": [
     "",
@@ -7,4 +8,15 @@
   ],
   "SelectedNode": "\\Pages\\ForgotPassword.css",
   "PreviewInSolutionExplorer": false
+=======
+{
+  "ExpandedNodes": [
+    "",
+    "\\annonces",
+    "\\components",
+    "\\Pages"
+  ],
+  "SelectedNode": "\\Pages\\ForgotPassword.css",
+  "PreviewInSolutionExplorer": false
+>>>>>>> c76881e (premier commit)
 }

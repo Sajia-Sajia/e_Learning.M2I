@@ -19,7 +19,11 @@ function Liststudent() {
   const getStudents = async () => {
     try {
       //modifier par nabil 
+<<<<<<< HEAD
       const response = await axios.get("http://localhost:8082/etudiants"); // Endpoint back-end
+=======
+      const response = await axios.get("http://localhost:8085/etudiants"); // Endpoint back-end
+>>>>>>> c76881e (premier commit)
       setStudentList(response.data); // Mise à jour de la liste des étudiants
       setFilteredStudents(response.data); // Initialise avec toutes les données
       setLoading(false); // Fin du chargement
