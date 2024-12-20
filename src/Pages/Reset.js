@@ -36,13 +36,41 @@ const Reset = () => {
     return (
         <>
 
+
             {/* Barre de navigation fixée en haut */}
-            <div className="navbar">
-                <div className="logo-home-container">
-                    <img src="/images/logo.png" alt="Logo" style={{ height: '60px' }} />
-                    
+            {/* Barre de navigation fixée en haut */}
+            <div className="navbar" style={{
+                backgroundColor: 'white',
+                boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.1)',
+                padding: '10px 20px',
+                display: 'flex',
+                alignItems: 'center',
+                height: '80px',
+                position: 'fixed',
+                top: 0,
+                width: '100%',
+                zIndex: 1000
+            }}>
+                <div className="logo-home-container" style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    position: 'relative'
+                }}>
+                    <img
+                        src="/images/newlogo.png"
+                        alt="Logo"
+                        style={{
+                            height: '150px',
+                            objectFit: 'contain',
+                            position: 'absolute',
+                            left: '20px',
+                            top: '50%',
+                            transform: 'translateY(-50%)',
+                            zIndex: 1000
+                        }}
+                    />
                 </div>
-            </div >
+            </div>
         <div className="forgot-container">
 
             <div className="forgot-form">
