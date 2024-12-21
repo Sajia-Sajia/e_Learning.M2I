@@ -1,27 +1,32 @@
-<<<<<<< HEAD
-/* Ajoute cette règle pour que la barre de navigation soit en haut */
+/* Barre de navigation fixÃ©e en haut */
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background-color: transparent;
+    background-color: white;
     z-index: 1000;
     padding: 10px 20px;
     display: flex;
     align-items: center;
     height: 80px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+/* Conteneur pour le logo et le lien Home */
 .logo-home-container {
     display: flex;
     align-items: center;
-    gap: 10px;
+    position: relative;
 }
 
 .logo-home-container img {
     height: 80px;
     width: auto;
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .home-link {
@@ -29,20 +34,23 @@
     align-items: center;
     text-decoration: none;
     color: black;
+    margin-left: 180px;
     gap: 5px;
 }
 
-/* Modification principale pour placer le contenu en bas */
+.home-link svg {
+    color: rgba(128, 128, 128, 0.5);
+}
+
+/* Conteneur principal de la page de connexion */
 .login-container {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     background-color: #f7f8fa;
-    padding-top: 100px; /* Espace pour la navbar */
-    margin-top: 0; /* Enlever la marge négative */
+    padding-top: 100px; /* Espace pour la barre de navigation */
 }
-
 
 .login-image {
     flex: 1;
@@ -51,10 +59,10 @@
     align-items: center;
 }
 
-    .login-image img {
-        max-width: 100%;
-        height: auto;
-    }
+.login-image img {
+    max-width: 100%;
+    height: auto;
+}
 
 .login-form {
     flex: 1;
@@ -76,37 +84,30 @@ p {
     margin-bottom: 2rem;
 }
 
-.input-group label {
-    display: flex;
-    margin-bottom: 0.5rem;
-    font-size: 0.9rem;
-    color: #333;
-}
-
 .input-group {
     display: flex;
-    align-items: center; /* Centre verticalement les éléments */
+    align-items: center;
     margin-bottom: 1.5rem;
-    position: relative; /* Ajouté pour le positionnement absolu des icônes */
+    position: relative;
     border-radius: 8px;
     height: 50px;
 }
 
-.icon {
-    font-size: 16px;
-    position: absolute; /* Assurez-vous que l'icône est positionnée absolument */
-    left: 10px; /* Positionne l'icône à gauche de l'input */
-    top: 50%;
-    transform: translateY(-50%); /* Corrige la position verticale */
-    color: #999; /* Couleur optionnelle pour l'icône */
-}
-
 .input-group input {
-    width: 100%; /* S'assurer que l'input prend toute la largeur */
-    padding: 0.75rem 0.75rem 0.75rem 40px; /* Ajoute du padding à gauche pour éviter le chevauchement avec l'icône */
+    width: 100%;
+    padding: 0.75rem 0.75rem 0.75rem 40px;
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 1rem;
+}
+
+.icon {
+    font-size: 16px;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
 }
 
 .effacer-formulaire {
@@ -116,163 +117,11 @@ p {
     margin-bottom: 1.5rem;
 }
 
-    .effacer-formulaire a {
-        color: #6c63ff;
-        text-decoration: none;
-        font-size: 0.9rem;
-    }
-
-.login-btn {
-    width: 100%;
-    height: 45px;
-    padding: 0.75rem;
-    background-color: #6c63ff;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-}
-
-    .login-btn:hover {
-        background-color: #5a54d9;
-    }
-
-.danger {
-    height: 2px;
-    color: red;
-    font-size: 12px;
-    bottom: 20px;
-}
-=======
-/* Ajoute cette règle pour que la barre de navigation soit en haut */
-.navbar {
-    position: fixed; /* Position fixe */
-    top: 0; /* Lien vers le haut de la page */
-    left: 0;
-    width: 100%; /* Prendre toute la largeur de la page */
-    background-color: #f7f8fa;
-    z-index: 1000; /* Assure que la barre reste au-dessus de tout */
-    padding: 10px 20px;
-    display: flex; /* Utiliser Flexbox */
-    align-items: center; /* Aligner les éléments verticalement au centre */
-    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); Ombre pour l'effet flottant */
-    margin-bottom: 0;
-}
-
-/* Conteneur pour le logo et le lien Home */
-.logo-home-container {
-    display: flex; /* Aligne le logo et Home horizontalement */
-    align-items: center; /* Aligne le logo et l'icône de Home verticalement */
-}
-
-/* Style pour le lien Home */
-.home-link {
-    color: black; /* Style de couleur du lien */
+.effacer-formulaire a {
+    color: #6c63ff;
     text-decoration: none;
-    font-size: 1rem;
-    display: flex; /* Affiche Home en ligne avec l'icône */
-    align-items: center; /* Aligne verticalement le texte et l'icône */
-    margin-left: 10px; /* Ajoute un espace entre le logo et Home */
-}
-
-    /* Style pour l'icône Home */
-    .home-link svg {
-        margin-left: 20px;
-        color: rgba(128, 128, 128, 0.5); /* Couleur de l'icône */
-    }
-
-.logo-container {
-    flex-grow: 0; /* Le logo ne doit pas se redimensionner */
-}
-
-
-.login-container {   
-    margin-top:-76px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f7f8fa;
-}
-
-.login-image {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-    .login-image img {
-        max-width: 100%;
-        height: auto;
-    }
-
-.login-form {
-    flex: 1;
-    padding: 2rem;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 550px;
-    margin-right: 100px;
-}
-
-h2 {
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-}
-
-p {
-    color: #6c757d;
-    margin-bottom: 2rem;
-}
-
-.input-group label {
-    display: flex;
-    margin-bottom: 0.5rem;
     font-size: 0.9rem;
-    color: #333;
 }
-
-.input-group {
-    display: flex;
-    align-items: center; /* Centre verticalement les éléments */
-    margin-bottom: 1.5rem;
-    position: relative; /* Ajouté pour le positionnement absolu des icônes */
-    border-radius: 8px;
-    height: 50px;
-}
-
-.icon {
-    font-size: 16px;
-    position: absolute; /* Assurez-vous que l'icône est positionnée absolument */
-    left: 10px; /* Positionne l'icône à gauche de l'input */
-    top: 50%;
-    transform: translateY(-50%); /* Corrige la position verticale */
-    color: #999; /* Couleur optionnelle pour l'icône */
-}
-
-.input-group input {
-    width: 100%; /* S'assurer que l'input prend toute la largeur */
-    padding: 0.75rem 0.75rem 0.75rem 40px; /* Ajoute du padding à gauche pour éviter le chevauchement avec l'icône */
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
-}
-
-.effacer-formulaire {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-}
-
-    .effacer-formulaire a {
-        color: #6c63ff;
-        text-decoration: none;
-        font-size: 0.9rem;
-    }
 
 .login-btn {
     width: 100%;
@@ -286,9 +135,9 @@ p {
     cursor: pointer;
 }
 
-    .login-btn:hover {
-        background-color: #5a54d9;
-    }
+.login-btn:hover {
+    background-color: #5a54d9;
+}
 
 .danger {
     height: 2px;
@@ -296,4 +145,3 @@ p {
     font-size: 12px;
     bottom: 20px;
 }
->>>>>>> c76881e (premier commit)

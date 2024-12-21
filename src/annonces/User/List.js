@@ -6,38 +6,30 @@ import { Link } from "react-router-dom";
 
 function List() {
   const [profList, setProfList] = useState([]); // Liste des professeurs
-<<<<<<< HEAD
-  const [isLoading, setLoading] = useState(true); // Indicateur de chargement
-=======
   const [filteredProfList, setFilteredProfList] = useState([]); // Liste filtrée des professeurs
   const [isLoading, setLoading] = useState(true); // Indicateur de chargement
   const [searchTerm, setSearchTerm] = useState(""); // Terme de recherche
->>>>>>> c76881e (premier commit)
 
   useEffect(() => {
     getProfesseurs();
   }, []);
 
-<<<<<<< HEAD
-=======
   useEffect(() => {
     filterProfesseurs();
   }, [searchTerm, profList]);
 
->>>>>>> c76881e (premier commit)
   // Récupération de la liste des professeurs via l'API
   const getProfesseurs = async () => {
     try {
-      const response = await axios.get("http://localhost:8085/api/professeurs"); // Endpoint API back-end
+      const response = await axios.get("http://localhost:8085/api/professeurs"); // Endpoint API
       setProfList(response.data); // Mise à jour de la liste des professeurs
+      setFilteredProfList(response.data); // Initialisation de la liste filtrée
       setLoading(false); // Fin du chargement
     } catch (error) {
       console.error("Erreur lors de la récupération des professeurs :", error);
     }
   };
 
-<<<<<<< HEAD
-=======
   // Filtrage des professeurs par nom, prénom ou admin
   const filterProfesseurs = () => {
     const lowerSearchTerm = searchTerm.toLowerCase();
@@ -45,7 +37,7 @@ function List() {
       const nom = prof.nom ? prof.nom.toLowerCase() : "";
       const prenom = prof.prenom ? prof.prenom.toLowerCase() : "";
       const isAdmin = prof.isadmin ? "oui" : "non";
-  
+
       return (
         nom.includes(lowerSearchTerm) ||
         prenom.includes(lowerSearchTerm) ||
@@ -54,9 +46,7 @@ function List() {
     });
     setFilteredProfList(filtered);
   };
-  
 
->>>>>>> c76881e (premier commit)
   // Suppression d'un professeur
   const handleDelete = async (id) => {
     try {
@@ -79,11 +69,6 @@ function List() {
           Ajouter un professeur
         </Link>
       </div>
-<<<<<<< HEAD
-      <div className="card shadow mb-4">
-        <div className="card-header py-3">
-          <h6 className="m-0 font-weight-bold text-primary">Professeurs</h6>
-=======
 
       <div className="card shadow mb-4">
         <div className="card-header py-3">
@@ -95,7 +80,6 @@ function List() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
->>>>>>> c76881e (premier commit)
         </div>
         <div className="card-body">
           {isLoading ? (
@@ -126,11 +110,7 @@ function List() {
                   </tr>
                 </tfoot>
                 <tbody>
-<<<<<<< HEAD
-                  {profList.map((prof) => (
-=======
                   {filteredProfList.map((prof) => (
->>>>>>> c76881e (premier commit)
                     <tr key={prof.id}>
                       <td>{prof.id}</td>
                       <td>{prof.nom}</td>

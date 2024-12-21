@@ -1,17 +1,4 @@
-<<<<<<< HEAD
-import { faFaceLaughWink, faTachographDigital, faUsers } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
-import { Link } from 'react-router-dom';
 
-function Sidebar() {
-    return (
-        <ul 
-            className="navbar-nav sidebar sidebar-dark accordion" 
-            id="accordionSidebar"
-            style={{ backgroundColor: "rgba(97, 165, 194, 0.6)" }} // Mise à jour de la couleur de fond
-        >
-=======
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -27,12 +14,11 @@ function Sidebar() {
         </div>
         <div className="sidebar-brand-text mx-3">E-learning <sup>2</sup></div>
       </a>
->>>>>>> pageProfSajiaNoura
+
 
       {/* Divider */}
       <hr className="sidebar-divider my-0" />
 
-<<<<<<< HEAD
             {/* <!-- Divider --> */}
             <hr className="sidebar-divider my-0" />
 
@@ -67,18 +53,6 @@ function Sidebar() {
                 </Link>
             </li>
         </ul>
-    );
-=======
-      {/* Nav Item - User Management */}
-      <li className="nav-item">
-        <Link className="nav-link" to="/portal/user-list">
-          <FontAwesomeIcon icon={faUsers} style={{ marginRight: '0.5rem' }} />
-          <span>Gérer Annonces</span>
-        </Link>
-      </li>
-    </ul>
-  );
->>>>>>> pageProfSajiaNoura
-}
+    );}
 
 export default Sidebar;
