@@ -1,54 +1,48 @@
 <<<<<<< HEAD
 /* Ajoute cette règle pour que la barre de navigation soit en haut */
 .navbar {
-    position: fixed; /* Position fixe */
-    top: 0; /* Lien vers le haut de la page */
+    position: fixed;
+    top: 0;
     left: 0;
-    width: 100%; /* Prendre toute la largeur de la page */
-    background-color: #f7f8fa;
-    z-index: 1000; /* Assure que la barre reste au-dessus de tout */
+    width: 100%;
+    background-color: transparent;
+    z-index: 1000;
     padding: 10px 20px;
-    display: flex; /* Utiliser Flexbox */
-    align-items: center; /* Aligner les éléments verticalement au centre */
-    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); Ombre pour l'effet flottant */
-    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    height: 80px;
 }
 
-/* Conteneur pour le logo et le lien Home */
 .logo-home-container {
-    display: flex; /* Aligne le logo et Home horizontalement */
-    align-items: center; /* Aligne le logo et l'icône de Home verticalement */
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-/* Style pour le lien Home */
+.logo-home-container img {
+    height: 80px;
+    width: auto;
+}
+
 .home-link {
-    color: black; /* Style de couleur du lien */
+    display: flex;
+    align-items: center;
     text-decoration: none;
-    font-size: 1rem;
-    display: flex; /* Affiche Home en ligne avec l'icône */
-    align-items: center; /* Aligne verticalement le texte et l'icône */
-    margin-left: 10px; /* Ajoute un espace entre le logo et Home */
+    color: black;
+    gap: 5px;
 }
 
-    /* Style pour l'icône Home */
-    .home-link svg {
-        margin-left: 20px;
-        color: rgba(128, 128, 128, 0.5); /* Couleur de l'icône */
-    }
-
-.logo-container {
-    flex-grow: 0; /* Le logo ne doit pas se redimensionner */
-}
-
-
-.login-container {   
-    margin-top:-76px;
+/* Modification principale pour placer le contenu en bas */
+.login-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     background-color: #f7f8fa;
+    padding-top: 100px; /* Espace pour la navbar */
+    margin-top: 0; /* Enlever la marge négative */
 }
+
 
 .login-image {
     flex: 1;

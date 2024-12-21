@@ -36,8 +36,22 @@ const HomePage = () => {
       
       <Box sx={{ flexGrow: 1, paddingTop: '80px' }}> {/* Ajustez le padding-top selon la hauteur de votre header */}
         <WelcomeSection />
+        <br></br>
+        <br></br>
+        <br></br><br></br>
+        <br></br>
+        <br></br>
+
         <MotivationBox />
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
         <ValuesCard />
+<br></br>
+<br></br>
+<br></br>
+<br></br>
 
         {visibleSemester && (
           <Box sx={{ padding: '20px', textAlign: 'center' }}>

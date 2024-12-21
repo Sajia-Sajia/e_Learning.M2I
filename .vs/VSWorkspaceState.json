@@ -2,13 +2,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\public",
     "\\src",
-    "\\src\\annonces",
-    "\\src\\components",
     "\\src\\Pages"
   ],
-  "SelectedNode": "\\src\\annonces\\Portal.js",
+  "SelectedNode": "\\src\\Pages\\Reset.js",
   "PreviewInSolutionExplorer": false
 =======
 {

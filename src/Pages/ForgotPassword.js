@@ -19,18 +19,64 @@ const ForgotPassword = () => {
     };
 
     return (
-            <>
+        <>
 
             {/* Barre de navigation fixée en haut */}
-            <div className="navbar">
-                <div className="logo-home-container">
-                    <img src="/images/logo.png" alt="Logo" style={{ height: '60px' }} />
-                    <Link to="/" className="home-link">
-                        <HomeIcon sx={{ marginLeft: '5px', color: 'rgba(128, 128, 128, 0.5)' }} />
-                        <span style={{ verticalAlign: 'middle', marginTop: '2px' }}> Home</span>
+            <div className="navbar" style={{
+                backgroundColor: 'white',
+                boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.1)',
+                padding: '10px 20px',
+                display: 'flex',
+                alignItems: 'center',
+                height: '80px',
+                position: 'fixed',
+                top: 0,
+                width: '100%',
+                zIndex: 1000
+            }}>
+                <div className="logo-home-container" style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    position: 'relative'
+                }}>
+                    <img
+                        src="/images/newlogo.png"
+                        alt="Logo"
+                        style={{
+                            height: '150px',
+                            objectFit: 'contain',
+                            position: 'absolute',
+                            left: '20px',
+                            top: '50%',
+                            transform: 'translateY(-50%)',
+                            zIndex: 1000
+                        }}
+                    />
+                    <Link
+                        to="/"
+                        className="home-link"
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            textDecoration: 'none',
+                            color: 'black',
+                            marginLeft: '180px'  // Espace pour le logo
+                        }}
+                    >
+                        <HomeIcon sx={{
+                            marginRight: '5px',
+                            color: 'rgba(128, 128, 128, 0.5)'
+                        }} />
+                        <span style={{
+                            verticalAlign: 'middle',
+                            marginTop: '2px'
+                        }}>
+                            Home
+                        </span>
                     </Link>
                 </div>
-            </div >
+            </div>
+
         <div className="forgot-container">
            
             <div className="forgot-form">

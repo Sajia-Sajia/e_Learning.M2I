@@ -37,7 +37,7 @@ const ValuesCard = () => {
         React.createElement(Card, {
           key: index,
           sx: {
-            maxWidth: 300,
+            maxWidth: 350,
             margin: '1rem',
             boxShadow: 3,
             color: 'white',
