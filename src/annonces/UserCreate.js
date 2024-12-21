@@ -1,7 +1,7 @@
-import axios from 'axios';
-import { useFormik } from 'formik';
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+import { useFormik } from "formik";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function UserCreate() {
   const [isLoading, setLoading] = useState(false);
@@ -9,115 +9,61 @@ function UserCreate() {
 
   const myFormik = useFormik({
     initialValues: {
-      titre: "",
+      title: "",
       description: "",
-      date_publication: "",
-      heur_pub: "",
+      date: "",
+      heure: "",
       type: "",
-      auteur_id: ""
     },
     validate: (values) => {
-      let errors = {};
+      const errors = {};
 
-      if (!values.titre) {
-        errors.titre = "Please enter title";
-      } else if (values.titre.length < 5) {
-        errors.titre = "Title shouldn't be less than 5 letters";
-      } else if (values.titre.length > 50) {
-        errors.titre = "Title shouldn't be more than 50 letters";
-      }
-
-      if (!values.description) {
-        errors.description = "Please enter description";
-      }
-
-      if (!values.date_publication) {
-        errors.date_publication = "Please enter publication date";
-      }
-
-      if (!values.heur_pub) {
-        errors.heur_pub = "Please enter publication time";
-      }
-
-      if (!values.type) {
-        errors.type = "Please select a type";
-      }
-
-      if (!values.auteur_id) {
-        errors.auteur_id = "Please enter author ID";
-      }
+      if (!values.title) errors.title = "Please enter title";
+      if (!values.description) errors.description = "Please enter description";
+      if (!values.date) errors.date = "Please enter date";
+      if (!values.heure) errors.heure = "Please enter time";
+      if (!values.type) errors.type = "Please select a type";
 
       return errors;
     },
     onSubmit: async (values) => {
       try {
         setLoading(true);
-        await axios.post("https://63a9bccb7d7edb3ae616b639.mockapi.io/users", values);
+        await axios.post("http://localhost:8085/Annonce/add", values);
         navigate("/portal/user-list");
       } catch (error) {
-        console.log(error);
-        alert("Validation failed");
+        console.error("Erreur lors de la création :", error);
         setLoading(false);
       }
-
-      console.log(values);
-    }
+    },
   });
 
   return (
-    <div className='container'>
+    <div className="container">
+      <h3>Create Annonce</h3>
       <form onSubmit={myFormik.handleSubmit}>
-        <div className='row'>
-          <div className="col-lg-6">
-            <label>Title</label>
-            <input name='titre' value={myFormik.values.titre} onChange={myFormik.handleChange} type={"text"}
-              className={`form-control ${myFormik.errors.titre ? "is-invalid" : ""} `} />
-            <span style={{ color: "red" }}>{myFormik.errors.titre}</span>
-          </div>
-
-          <div className="col-lg-6">
-            <label>Description</label>
-            <textarea name='description' value={myFormik.values.description} onChange={myFormik.handleChange}
-              className={`form-control ${myFormik.errors.description ? "is-invalid" : ""} `}></textarea>
-            <span style={{ color: "red" }}>{myFormik.errors.description}</span>
-          </div>
-
-          <div className="col-lg-4">
-            <label>Publication Date</label>
-            <input name='date_publication' value={myFormik.values.date_publication} onChange={myFormik.handleChange} type={"date"}
-              className={`form-control ${myFormik.errors.date_publication ? "is-invalid" : ""} `} />
-            <span style={{ color: "red" }}>{myFormik.errors.date_publication}</span>
-          </div>
-
-          <div className="col-lg-4">
-            <label>Publication Time</label>
-            <input name='heur_pub' value={myFormik.values.heur_pub} onChange={myFormik.handleChange} type={"time"}
-              className={`form-control ${myFormik.errors.heur_pub ? "is-invalid" : ""} `} />
-            <span style={{ color: "red" }}>{myFormik.errors.heur_pub}</span>
-          </div>
-
-          <div className="col-lg-4">
-            <label>Type</label>
-            <select name='type' value={myFormik.values.type} onChange={myFormik.handleChange}
-              className={`form-control ${myFormik.errors.type ? "is-invalid" : ""} `}>
-              <option value="">----Select----</option>
-              <option value="news">News</option>
-              <option value="article">Article</option>
-              <option value="blog">Blog</option>
-            </select>
-            <span style={{ color: "red" }}>{myFormik.errors.type}</span>
-          </div>
-
-          <div className="col-lg-4">
-            <label>Author ID</label>
-            <input name='auteur_id' value={myFormik.values.auteur_id} onChange={myFormik.handleChange} type={"text"}
-              className={`form-control ${myFormik.errors.auteur_id ? "is-invalid" : ""} `} />
-            <span style={{ color: "red" }}>{myFormik.errors.auteur_id}</span>
-          </div>
-
-          <div className='col-lg-4 mt-3'>
-            <input disabled={isLoading} type="submit" value={isLoading ? "Submitting..." : "Create"} className='btn btn-primary' />
-          </div>
+        <div className="row">
+          {["title", "description", "date", "heure", "type"].map((field, index) => (
+            <div className="col-lg-6" key={index}>
+              <label>{field.charAt(0).toUpperCase() + field.slice(1)}</label>
+              <input
+                name={field}
+                value={myFormik.values[field]}
+                onChange={myFormik.handleChange}
+                type={field === "date" ? "date" : field === "heure" ? "time" : field === "auteurId" ? "number" : "text"}
+                className={`form-control ${myFormik.errors[field] ? "is-invalid" : ""}`}
+              />
+              <span style={{ color: "red" }}>{myFormik.errors[field]}</span>
+            </div>
+          ))}
+        </div>
+        <div className="col-lg-4 mt-3">
+          <input
+            disabled={isLoading}
+            type="submit"
+            value={isLoading ? "Submitting..." : "Create"}
+            className="btn btn-primary"
+          />
         </div>
       </form>
     </div>

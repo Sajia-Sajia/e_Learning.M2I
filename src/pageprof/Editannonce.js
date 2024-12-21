@@ -1,144 +1,95 @@
-import axios from 'axios';
-import { useFormik } from 'formik';
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+ï»¿import axios from "axios";
+import { useFormik } from "formik";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
-function Editannonce() {
-    const params = useParams();
+function EditAnnonce() {
+    const { id } = useParams();
     const [isLoading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
-        getUserData();
+        getAnnonceData();
     }, []);
 
-    let getUserData = async () => {
+    const getAnnonceData = async () => {
         try {
-            const user = await axios.get(`https://63a9bccb7d7edb3ae616b639.mockapi.io/users/${params.id}`);
-            myFormik.setValues(user.data);
+            const response = await axios.get(`http://localhost:8082/Annonce/get/${id}`);
+            myFormik.setValues(response.data);
             setLoading(false);
         } catch (error) {
-            console.log(error);
+            console.error("Erreur lors de la rÃ©cupÃ©ration des donnÃ©es :", error);
         }
     };
 
     const myFormik = useFormik({
         initialValues: {
-            titre: "",
+            title: "",
             description: "",
-            date_publication: "",
-            heur_pub: "",
+            date: "",
+            heure: "",
             type: "",
-            auteur_id: ""
+            auteurId: ""
         },
         validate: (values) => {
-            let errors = {};
+            const errors = {};
 
-            if (!values.titre) {
-                errors.titre = "Veuillez entrer le titre";
-            } else if (values.titre.length < 5) {
-                errors.titre = "Le titre ne doit pas comporter moins de 5 lettres.";
-            } else if (values.titre.length > 50) {
-                errors.titre = "Le titre ne doit pas comporter plus de 50 lettres.";
-            }
-
-            if (!values.description) {
-                errors.description = "Veuillez entrer la description";
-            }
-
-            if (!values.date_publication) {
-                errors.date_publication = "Veuillez entrer la date de la publication";
-            }
-
-            if (!values.heur_pub) {
-                errors.heur_pub = "Veuillez entrer l'heure de la publication";
-            }
-
-            if (!values.type) {
-                errors.type = "Veuillez séléctionner le type";
-            }
-
-            if (!values.auteur_id) {
-                errors.auteur_id = "Ce champs est obligatoire";
-            }
+            if (!values.title) errors.title = "Veuillez entrer le titre";
+            if (!values.description) errors.description = "Veuillez entrer la description";
+            if (!values.date) errors.date = "Veuillez entrer la date";
+            if (!values.heure) errors.heure = "Veuillez entrer l'heure";
+            if (!values.type) errors.type = "Veuillez sÃ©lectionner le type";
+            if (!values.auteurId) errors.auteurId = "Veuillez entrer le author ID";
 
             return errors;
         },
-
         onSubmit: async (values) => {
             try {
                 setLoading(true);
-                await axios.put(`https://63a9bccb7d7edb3ae616b639.mockapi.io/users/${params.id}`, values);
+                await axios.put(`http://localhost:8082/Annonce/update/${id}`, values);
                 setLoading(false);
                 navigate("/portalprof/annonces-list");
             } catch (error) {
-                console.log(error);
+                console.error("Erreur lors de la mise Ã  jour :", error);
                 setLoading(false);
             }
-        }
+        },
     });
 
     return (
         <>
-            <h3>Modification de l'annonce - Id : {params.id}</h3>
-            <div className='container'>
-                <form onSubmit={myFormik.handleSubmit}>
-                    <div className='row'>
-                        <div className="col-lg-6">
-                            <label>Titre</label>
-                            <input name='titre' value={myFormik.values.titre} onChange={myFormik.handleChange} type="text"
-                                className={`form-control ${myFormik.errors.titre ? "is-invalid" : ""}`} />
-                            <span style={{ color: "red" }}>{myFormik.errors.titre}</span>
+            <h3>Modification de l'annonce - ID : {id}</h3>
+            <div className="container">
+                <div className="card shadow mb-4">
+                    <div className="card-header py-3">
+            <form onSubmit={myFormik.handleSubmit}>
+                <div className="row">
+                                {["auteurId", "title", "description", "date", "heure", "type"].map((field, index) => (
+                        <div className="col-lg-12" key={index}>
+                            <label>{field.charAt(0).toUpperCase() + field.slice(1)}</label>
+                            <input
+                                name={field}
+                                value={myFormik.values[field]}
+                                onChange={myFormik.handleChange}
+                                            type={field === "date" ? "date" : field === "heure" ? "time" : "text"}
+                                className={`form-control ${myFormik.errors[field] ? "is-invalid" : ""}`}
+                                readOnly={field === "auteurId"}
+                            />
+                            <span style={{ color: "red" }}>{myFormik.errors[field]}</span>
                         </div>
-
-                        <div className="col-lg-6">
-                            <label>Description</label>
-                            <textarea name='description' value={myFormik.values.description} onChange={myFormik.handleChange}
-                                className={`form-control ${myFormik.errors.description ? "is-invalid" : ""}`}></textarea>
-                            <span style={{ color: "red" }}>{myFormik.errors.description}</span>
-                        </div>
-
-                        <div className="col-lg-4">
-                            <label>Date de la publication</label>
-                            <input name='date_publication' value={myFormik.values.date_publication} onChange={myFormik.handleChange} type="date"
-                                className={`form-control ${myFormik.errors.date_publication ? "is-invalid" : ""}`} />
-                            <span style={{ color: "red" }}>{myFormik.errors.date_publication}</span>
-                        </div>
-
-                        <div className="col-lg-4">
-                            <label>Heure de la publication</label>
-                            <input name='heur_pub' value={myFormik.values.heur_pub} onChange={myFormik.handleChange} type="time"
-                                className={`form-control ${myFormik.errors.heur_pub ? "is-invalid" : ""}`} />
-                            <span style={{ color: "red" }}>{myFormik.errors.heur_pub}</span>
-                        </div>
-
-                        <div className="col-lg-4">
-                            <label>Type</label>
-                            <select name='type' value={myFormik.values.type} onChange={myFormik.handleChange}
-                                className={`form-control ${myFormik.errors.type ? "is-invalid" : ""}`}>
-                                <option value="">----Séléctionnez----</option>
-                                <option value="news">Nouvelles</option>
-                                <option value="article">Article</option>
-                                <option value="blog">Blog</option>
-                            </select>
-                            <span style={{ color: "red" }}>{myFormik.errors.type}</span>
-                        </div>
-
-                        <div className="col-lg-4">
-                            <label>ID de professeur</label>
-                            <input name='auteur_id' value={myFormik.values.auteur_id} onChange={myFormik.handleChange} type="text"
-                                className={`form-control ${myFormik.errors.auteur_id ? "is-invalid" : ""}`} />
-                            <span style={{ color: "red" }}>{myFormik.errors.auteur_id}</span>
-                        </div>
-
-                        <div className='col-lg-4 mt-3'>
-                            <input disabled={isLoading} type="submit" value={isLoading ? "Updating..." : "Modifier"} className='btn btn-primary' />
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </>
+                    ))}
+                </div>
+                <div className="col-lg-12 mt-3">
+                    <input
+                        disabled={isLoading}
+                        type="submit"
+                        value={isLoading ? "En cours de modification..." : "Modifier"}
+                        className="btn btn-primary"
+                    />
+                </div>
+                        </form>
+                    </div></div></div></>
     );
 }
 
-export default Editannonce;
+export default EditAnnonce;

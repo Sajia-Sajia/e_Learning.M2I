@@ -9,11 +9,12 @@ import MapComponent from './MapComponent';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
+// Composant Alert pour les notifications
 const Alert = React.forwardRef((props, ref) => {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-const Footer = ({ darkMode, onRatingSubmit }) => {
+const Footer = ({ darkMode }) => {
   const [open, setOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
 
@@ -44,6 +45,7 @@ const Footer = ({ darkMode, onRatingSubmit }) => {
           gap: '2rem',
         }}
       >
+        {/* Section des coordonnées */}
         <Box sx={{ flex: 1 }}>
           <Typography variant="h6" gutterBottom>
             Coordonnées de L'université
@@ -58,6 +60,7 @@ const Footer = ({ darkMode, onRatingSubmit }) => {
             Email: FS@OUJDA.com
           </Typography>
 
+          {/* Liens vers les réseaux sociaux */}
           <Box sx={{ marginTop: '1rem' }}>
             <IconButton href="https://facebook.com" target="_blank" aria-label="Facebook">
               <FacebookIcon fontSize="large" sx={{ color: darkMode ? '#1877F2' : '#4267B2' }} />
@@ -71,6 +74,7 @@ const Footer = ({ darkMode, onRatingSubmit }) => {
           </Box>
         </Box>
 
+        {/* Section de la carte */}
         <Box
           sx={{
             flex: 1,
@@ -88,7 +92,12 @@ const Footer = ({ darkMode, onRatingSubmit }) => {
         </Box>
       </Box>
 
-     
+      {/* Snackbar pour les alertes */}
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success">
+          {alertMessage}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };

@@ -1,211 +1,81 @@
-import { faBell, faCircleUser, faEnvelope } from '@fortawesome/free-regular-svg-icons'
-import { faBars, faSearch } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { faBell, faEnvelope } from '@fortawesome/free-regular-svg-icons';
+import { faBars, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 
 function Topbar() {
+    const [profileImage, setProfileImage] = useState(null); // État pour stocker l'image de profil
+
+    useEffect(() => {
+        const fetchProfileImage = async () => {
+            try {
+                const response = await axios.get('http://localhost:8082/professeur/admin/profile/6738e2dbca70207704909f4b');
+                setProfileImage(response.data.imageURL); // Remplacez 'imageURL' par le bon champ
+            } catch (error) {
+                console.error("Erreur lors de la récupération de l'image de profil:", error);
+            }
+        };
+
+        fetchProfileImage();
+    }, []);
+
     return (
         <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-            {/* <!-- Sidebar Toggle (Topbar) --> */}
+            {/* Sidebar Toggle (Topbar) */}
             <button id="sidebarToggleTop" className="btn btn-link d-md-none rounded-circle mr-3">
                 <FontAwesomeIcon icon={faBars} />
             </button>
 
-            {/* <!-- Topbar Search --> */}
-            <form
-                className="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                <div className="input-group">
-                    <input type="text" className="form-control bg-light border-0 small" placeholder="Search for..."
-                        aria-label="Search" aria-describedby="basic-addon2" />
-                    <div className="input-group-append">
-                        <button className="btn btn-primary" type="button">
-                            <FontAwesomeIcon icon={faSearch} />
-                        </button>
-                    </div>
-                </div>
-            </form>
+         
 
-            {/* <!-- Topbar Navbar --> */}
+            {/* Topbar Navbar */}
             <ul className="navbar-nav ml-auto">
-
-                {/* <!-- Nav Item - Search Dropdown (Visible Only XS) --> */}
-                <li className="nav-item dropdown no-arrow d-sm-none">
-                    <a className="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <FontAwesomeIcon icon={faSearch} />
-                    </a>
-                    {/* <!-- Dropdown - Messages --> */}
-                    <div className="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                        aria-labelledby="searchDropdown">
-                        <form className="form-inline mr-auto w-100 navbar-search">
-                            <div className="input-group">
-                                <input type="text" className="form-control bg-light border-0 small"
-                                    placeholder="Search for..." aria-label="Search"
-                                    aria-describedby="basic-addon2" />
-                                <div className="input-group-append">
-                                    <button className="btn btn-primary" type="button">
-                                        <i className="fas fa-search fa-sm"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </li>
-
-                {/* <!-- Nav Item - Alerts --> */}
+                {/* Alerts */}
                 <li className="nav-item dropdown no-arrow mx-1">
                     <a className="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <FontAwesomeIcon icon={faBell} />
-                        {/* <!-- Counter - Alerts --> */}
                         <span className="badge badge-danger badge-counter">3+</span>
                     </a>
-                    {/* <!-- Dropdown - Alerts --> */}
-                    <div className="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                        aria-labelledby="alertsDropdown">
-                        <h6 className="dropdown-header">
-                            Alerts Center
-                        </h6>
-                        <a className="dropdown-item d-flex align-items-center" href="#">
-                            <div className="mr-3">
-                                <div className="icon-circle bg-primary">
-                                    <i className="fas fa-file-alt text-white"></i>
-                                </div>
-                            </div>
-                            <div>
-                                <div className="small text-gray-500">December 12, 2019</div>
-                                <span className="font-weight-bold">A new monthly report is ready to download!</span>
-                            </div>
-                        </a>
-                        <a className="dropdown-item d-flex align-items-center" href="#">
-                            <div className="mr-3">
-                                <div className="icon-circle bg-success">
-                                    <i className="fas fa-donate text-white"></i>
-                                </div>
-                            </div>
-                            <div>
-                                <div className="small text-gray-500">December 7, 2019</div>
-                                $290.29 has been deposited into your account!
-                            </div>
-                        </a>
-                        <a className="dropdown-item d-flex align-items-center" href="#">
-                            <div className="mr-3">
-                                <div className="icon-circle bg-warning">
-                                    <i className="fas fa-exclamation-triangle text-white"></i>
-                                </div>
-                            </div>
-                            <div>
-                                <div className="small text-gray-500">December 2, 2019</div>
-                                Spending Alert: We've noticed unusually high spending for your account.
-                            </div>
-                        </a>
-                        <a className="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                    </div>
                 </li>
 
-                {/* <!-- Nav Item - Messages --> */}
+                {/* Messages */}
                 <li className="nav-item dropdown no-arrow mx-1">
                     <a className="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <FontAwesomeIcon icon={faEnvelope} />
-                        {/* <!-- Counter - Messages --> */}
                         <span className="badge badge-danger badge-counter">7</span>
                     </a>
-                    {/* <!-- Dropdown - Messages --> */}
-                    <div className="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                        aria-labelledby="messagesDropdown">
-                        <h6 className="dropdown-header">
-                            Message Center
-                        </h6>
-                        <a className="dropdown-item d-flex align-items-center" href="#">
-                            <div className="dropdown-list-image mr-3">
-                                <img className="rounded-circle" src="img/undraw_profile_1.svg"
-                                    alt="..." />
-                                <div className="status-indicator bg-success"></div>
-                            </div>
-                            <div className="font-weight-bold">
-                                <div className="text-truncate">Hi there! I am wondering if you can help me with a
-                                    problem I've been having.</div>
-                                <div className="small text-gray-500">Emily Fowler · 58m</div>
-                            </div>
-                        </a>
-                        <a className="dropdown-item d-flex align-items-center" href="#">
-                            <div className="dropdown-list-image mr-3">
-                                <img className="rounded-circle" src="img/undraw_profile_2.svg"
-                                    alt="..." />
-                                <div className="status-indicator"></div>
-                            </div>
-                            <div>
-                                <div className="text-truncate">I have the photos that you ordered last month, how
-                                    would you like them sent to you?</div>
-                                <div className="small text-gray-500">Jae Chun · 1d</div>
-                            </div>
-                        </a>
-                        <a className="dropdown-item d-flex align-items-center" href="#">
-                            <div className="dropdown-list-image mr-3">
-                                <img className="rounded-circle" src="img/undraw_profile_3.svg"
-                                    alt="..." />
-                                <div className="status-indicator bg-warning"></div>
-                            </div>
-                            <div>
-                                <div className="text-truncate">Last month's report looks great, I am very happy with
-                                    the progress so far, keep up the good work!</div>
-                                <div className="small text-gray-500">Morgan Alvarez · 2d</div>
-                            </div>
-                        </a>
-                        <a className="dropdown-item d-flex align-items-center" href="#">
-                            <div className="dropdown-list-image mr-3">
-                                <img className="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
-                                    alt="..." />
-                                <div className="status-indicator bg-success"></div>
-                            </div>
-                            <div>
-                                <div className="text-truncate">Am I a good boy? The reason I ask is because someone
-                                    told me that people say this to all dogs, even if they aren't good...</div>
-                                <div className="small text-gray-500">Chicken the Dog · 2w</div>
-                            </div>
-                        </a>
-                        <a className="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
-                    </div>
                 </li>
 
                 <div className="topbar-divider d-none d-sm-block"></div>
 
-                {/* <!-- Nav Item - User Information --> */}
+                {/* User Information */}
                 <li className="nav-item dropdown no-arrow">
-                    <Link className="nav-link dropdown-toggle" to="/" id="userDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <Link className="nav-link dropdown-toggle" to="/portal/ProfileAdmin" id="userDropdown" role="button">
                         <span className="mr-2 d-none d-lg-inline text-gray-600 small">Profile</span>
-                        <FontAwesomeIcon icon={faCircleUser} size={"xl"} />
+                        {profileImage ? (
+                            <img
+                                src={profileImage}
+                                alt="Profile"
+                                style={{
+                                    width: '40px',
+                                    height: '40px',
+                                    borderRadius: '50%',
+                                    objectFit: 'cover'
+                                }}
+                            />
+                        ) : (
+                            <FontAwesomeIcon icon={faCircleUser} size={"xl"} />
+                        )}
                     </Link>
-                    {/* <!-- Dropdown - User Information --> */}
-                    <div className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                        aria-labelledby="userDropdown">
-                        <a className="dropdown-item" href="#">
-                            <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Profile
-                        </a>
-                        <a className="dropdown-item" href="#">
-                            <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Settings
-                        </a>
-                        <a className="dropdown-item" href="#">
-                            <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Activity Log
-                        </a>
-                        <div className="dropdown-divider"></div>
-                        <a className="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                            <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Logout
-                        </a>
-                    </div>
                 </li>
-
             </ul>
-
         </nav>
-    )
+    );
 }
 
 export default Topbar;

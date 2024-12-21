@@ -32,8 +32,8 @@ const HomePage = () => {
       }}
     >
       <Header showSemester={showSemester} sx={{ position: 'fixed', top: 0, left: 0, right: 0 }} />
-      
-      <Box sx={{ flexGrow: 1, paddingTop: '80px' }}> {/* Ajustez le padding-top selon la hauteur de votre header */}
+
+      <Box sx={{ flexGrow: 1, paddingTop: '80px' }}>
         <WelcomeSection />
         <MotivationBox />
         <ValuesCard />
@@ -44,7 +44,7 @@ const HomePage = () => {
           </Box>
         )}
       </Box>
-      
+
       <Footer />
 
       <Box
