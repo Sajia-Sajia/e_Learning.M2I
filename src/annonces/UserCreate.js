@@ -14,7 +14,6 @@ function UserCreate() {
       date: "",
       heure: "",
       type: "",
-
     },
     validate: (values) => {
       const errors = {};
@@ -24,7 +23,6 @@ function UserCreate() {
       if (!values.date) errors.date = "Please enter date";
       if (!values.heure) errors.heure = "Please enter time";
       if (!values.type) errors.type = "Please select a type";
-
 
       return errors;
     },
@@ -45,7 +43,6 @@ function UserCreate() {
       <h3>Create Annonce</h3>
       <form onSubmit={myFormik.handleSubmit}>
         <div className="row">
-
           {["title", "description", "date", "heure", "type"].map((field, index) => (
             <div className="col-lg-6" key={index}>
               <label>{field.charAt(0).toUpperCase() + field.slice(1)}</label>
@@ -53,7 +50,6 @@ function UserCreate() {
                 name={field}
                 value={myFormik.values[field]}
                 onChange={myFormik.handleChange}
-
                 type={field === "date" ? "date" : field === "heure" ? "time" : field === "auteurId" ? "number" : "text"}
                 className={`form-control ${myFormik.errors[field] ? "is-invalid" : ""}`}
               />

@@ -21,9 +21,8 @@ function List() {
   // Récupération de la liste des professeurs via l'API
   const getProfesseurs = async () => {
     try {
-      const response = await axios.get("http://localhost:8085/api/professeurs"); // Endpoint API
+      const response = await axios.get("http://localhost:8085/api/professeurs"); // Endpoint API back-end
       setProfList(response.data); // Mise à jour de la liste des professeurs
-      setFilteredProfList(response.data); // Initialisation de la liste filtrée
       setLoading(false); // Fin du chargement
     } catch (error) {
       console.error("Erreur lors de la récupération des professeurs :", error);
@@ -37,7 +36,7 @@ function List() {
       const nom = prof.nom ? prof.nom.toLowerCase() : "";
       const prenom = prof.prenom ? prof.prenom.toLowerCase() : "";
       const isAdmin = prof.isadmin ? "oui" : "non";
-
+  
       return (
         nom.includes(lowerSearchTerm) ||
         prenom.includes(lowerSearchTerm) ||
@@ -46,6 +45,7 @@ function List() {
     });
     setFilteredProfList(filtered);
   };
+  
 
   // Suppression d'un professeur
   const handleDelete = async (id) => {

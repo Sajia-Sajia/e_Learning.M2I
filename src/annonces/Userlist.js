@@ -17,7 +17,6 @@ function Userlist() {
   const getUsers = async () => {
     try {
       //modifier par nabil 8082
-
       const response = await axios.get("http://localhost:8085/Annonce"); // URL du backend
       setUserList(response.data); // Stocke les données renvoyées par l'API
       setLoading(false); // Arrête l'affichage du loader
@@ -81,7 +80,6 @@ function Userlist() {
                     <th>Publication Date</th>
                     <th>Publication Time</th>
                     <th>Type</th>
-
                     
                     <th>Action</th>
                   </tr>
@@ -94,7 +92,6 @@ function Userlist() {
                     <th>Publication Date</th>
                     <th>Publication Time</th>
                     <th>Type</th>
-
                     <th>Action</th>
                   </tr>
                 </tfoot>
@@ -107,7 +104,6 @@ function Userlist() {
                       <td>{item.date}</td>
                       <td>{item.heure}</td>
                       <td>{item.type}</td>
-
                       <td>
                         <Link to={`/portal/user-edit/${item.id}`} className='btn btn-info btn-sm mr-1'>Modifier</Link>
                         <button onClick={() => handleDelete(item.id)} className='btn btn-danger btn-sm mr-1'>Supprimer</button>

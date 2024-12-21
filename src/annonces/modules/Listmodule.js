@@ -14,7 +14,6 @@ function Listmodule() {
 
   const fetchModules = async () => {
     try {
-
       const response = await axios.get("http://localhost:8085/api/modules");
       setModules(response.data);
       setFilteredModules(response.data); // Initialise la liste filtrée
