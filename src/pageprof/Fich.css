@@ -1,10 +1,10 @@
 /* Applique l'animation sur le fond du wrapper */
 .animated-background {
-    position: relative; /* Nécessaire pour contenir les enfants */
+    position: relative; /* Nï¿½cessaire pour contenir les enfants */
     min-height: 100vh; /* Occupe toute la hauteur de la page */
     background-size: cover !important; /* Force la couverture de l'image */
     background-position: center;
-    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+    background-repeat: no-repeat; /* Empï¿½che la rï¿½pï¿½tition de l'image */
     animation: slideBackground 20s infinite; /* Animation cyclique */
 }
 
@@ -26,7 +26,7 @@
     }
 }
 
-/* Assure que les autres contenus ne sont pas affectés */
+/* Assure que les autres contenus ne sont pas affectï¿½s */
 #content-wrapper,
 #content,
 .container-fluid {
