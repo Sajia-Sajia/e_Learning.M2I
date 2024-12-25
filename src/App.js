@@ -6,6 +6,7 @@ import Login from './Pages/Login';
 import Reset from './Pages/Reset';
 import ForgotPassword from './Pages/ForgotPassword';
 import HomePage from './Pages/HomePage'; 
+import ProgramPage from './Pages/ProgramPage';
 import Userlist from './annonces/Userlist';
 import Portal from './annonces/Portal';
 import Portalprof from './pageprof/Portalprof';
@@ -13,7 +14,6 @@ import UserCreate from './annonces/UserCreate';
 import UserView from './annonces/UserView';
 import UserEdit from './annonces/UserEdit';
 import Sidebar from './annonces/Sidebar';
-import Sidebarprof from './pageprof/Sidebarprof';
 import "./annonces/sb-admin-2.min.css";
 import Dashboard from './annonces/Dashboard';
 import TPList from './pageprof/TPList';
@@ -34,6 +34,8 @@ import Semestre2 from './etudiant/Semestre2';
 import Semestre4 from './etudiant/Semestre4';
 import Semestre3 from './etudiant/Semestre3';
 import Quiz from './etudiant/Quiz';
+import HomeProf from './pageprof/HomeProf';
+import ProfileProf from './pageprof/ProfileProf';
 
 function App() {
     return (
@@ -46,7 +48,8 @@ function App() {
                 <Route path="/ForgotPassword" element={<ForgotPassword />} />
                 <Route path="/Reset" element={<Reset />} />
                 <Route path='/sidebar' element={<Sidebar />} />
-                <Route path='/sidebarprof' element={<Sidebarprof />} />
+                <Route path="/HomeProf" element={<HomeProf />} />
+                <Route path="/ProfileProf" element={<ProfileProf />} />
                 <Route path="/portal" element={<Portal />}>
                     <Route path='dashboard' element={<Dashboard />} />
                     <Route path='user-list' element={<Userlist />} />
