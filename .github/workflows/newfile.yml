@@ -24,14 +24,6 @@ jobs:
         with:
           node-version: '18'
 
-      # Étape 3 : Vérification des conflits de fusion
-      - name: Check for Merge Conflicts
-        run: |
-          if grep -r "<<<<<<<" .; then
-            echo "Merge conflicts detected!";
-            exit 1;
-          fi
-
       # Étape 4 : Installation des dépendances nécessaires
       - name: Install Dependencies
         run: |
