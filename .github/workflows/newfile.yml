@@ -24,54 +24,34 @@ jobs:
         with:
           node-version: '18'
 
-      # Étape 3 : Cache des dépendances npm
-      - name: Cache Node Modules
-        uses: actions/cache@v3
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      # Étape 4 : Installation des dépendances
+      # Étape 3 : Installation des dépendances nécessaires
       - name: Install Dependencies
-        run: npm install --legacy-peer-deps
-
-      # Étape 5 : Configuration Babel et Jest
-      - name: Configure Babel and Jest
         run: |
-          echo '{
-            "presets": ["@babel/preset-env", "@babel/preset-react"]
-          }' > babel.config.json
-          echo '{
-            "transformIgnorePatterns": ["node_modules/(?!(react-leaflet|@fortawesome)/)"],
-            "moduleNameMapper": {
-              "\\.(css|less)$": "identity-obj-proxy"
-            }
-          }' > jest.config.json
+          npm install --legacy-peer-deps
+          npm install @fortawesome/fontawesome-svg-core @fortawesome/react-fontawesome @fortawesome/free-solid-svg-icons --save # Installation des modules manquants
 
-      # Étape 6 : Linting du code (optionnel mais conseillé)
+      # Étape 4 : Linting du code (optionnel mais conseillé)
       - name: Fix Linting Issues
         run: npm run lint --fix || true
 
-      # Étape 7 : Construction de l'application React
+      # Étape 5 : Construction de l'application React
       - name: Build React Application
         env:
           CI: false # Évite que les warnings soient traités comme des erreurs
         run: npm run build
 
-      # Étape 8 : Tests unitaires avec rapport
+      # Étape 6 : Tests unitaires avec rapport
       - name: Run React Tests
         run: npm test -- --watchAll=false --coverage
 
-      # Étape 9 : Téléchargement du rapport des tests comme artefact
+      # Étape 7 : Téléchargement du rapport des tests comme artefact
       - name: Upload Test Report
         uses: actions/upload-artifact@v3
         with:
           name: test-report
           path: ./coverage
 
-      # Étape 10 : Déploiement sur Heroku
+      # Étape 8 : Déploiement sur Heroku
       - name: Deploy to Heroku
         if: ${{ success() }}
         env:
