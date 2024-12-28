@@ -22,9 +22,11 @@ jobs:
         with:
           node-version: '18' # Mettez à jour pour éviter les problèmes de compatibilité avec Node.js
 
+      # Étape 3 : Installation des dépendances
       - name: Install Dependencies
-        run: npm install --legacy-peer-deps # Ajout pour gérer les dépendances conflictuelles
-             npm install @fortawesome/fontawesome-svg-core @fortawesome/react-fontawesome @fortawesome/free-solid-svg-icons --save # Ajout explicite de FontAwesome
+        run: |
+          npm install --legacy-peer-deps
+          npm install @fortawesome/fontawesome-svg-core @fortawesome/react-fontawesome @fortawesome/free-solid-svg-icons --save # Ajout explicite de FontAwesome
 
 
       - name: Fix Linting Issues
