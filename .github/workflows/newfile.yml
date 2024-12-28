@@ -24,34 +24,54 @@ jobs:
         with:
           node-version: '18'
 
-      # Étape 3 : Installation des dépendances nécessaires
+      # Étape 3 : Vérification des conflits de fusion
+      - name: Check for Merge Conflicts
+        run: |
+          if grep -r "<<<<<<<" .; then
+            echo "Merge conflicts detected!";
+            exit 1;
+          fi
+
+      # Étape 4 : Installation des dépendances nécessaires
       - name: Install Dependencies
         run: |
           npm install --legacy-peer-deps
-          npm install @fortawesome/fontawesome-svg-core @fortawesome/react-fontawesome @fortawesome/free-solid-svg-icons --save # Installation des modules manquants
+          npm install @fortawesome/fontawesome-svg-core @fortawesome/react-fontawesome @fortawesome/free-solid-svg-icons react-leaflet leaflet --save
 
-      # Étape 4 : Linting du code (optionnel mais conseillé)
+      # Étape 5 : Configuration Jest et Babel
+      - name: Configure Jest and Babel
+        run: |
+          echo "module.exports = {
+            transformIgnorePatterns: ['node_modules/(?!(react-leaflet|@fortawesome)/)'],
+            moduleNameMapper: {'\\\\.(css|less|png|jpg|svg)$': '<rootDir>/__mocks__/fileMock.js'},
+            collectCoverageFrom: ['src/**/*.{js,jsx}', '!src/index.js', '!src/reportWebVitals.js']
+          };" > jest.config.js
+          echo '{
+            "presets": ["@babel/preset-env", "@babel/preset-react"]
+          }' > babel.config.json
+
+      # Étape 6 : Linting du code
       - name: Fix Linting Issues
         run: npm run lint --fix || true
 
-      # Étape 5 : Construction de l'application React
+      # Étape 7 : Construction de l'application React
       - name: Build React Application
         env:
           CI: false # Évite que les warnings soient traités comme des erreurs
         run: npm run build
 
-      # Étape 6 : Tests unitaires avec rapport
+      # Étape 8 : Tests unitaires avec couverture
       - name: Run React Tests
         run: npm test -- --watchAll=false --coverage
 
-      # Étape 7 : Téléchargement du rapport des tests comme artefact
+      # Étape 9 : Téléchargement du rapport des tests comme artefact
       - name: Upload Test Report
         uses: actions/upload-artifact@v3
         with:
           name: test-report
           path: ./coverage
 
-      # Étape 8 : Déploiement sur Heroku
+      # Étape 10 : Déploiement sur Heroku
       - name: Deploy to Heroku
         if: ${{ success() }}
         env:
