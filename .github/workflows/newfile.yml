@@ -24,6 +24,8 @@ jobs:
 
       - name: Install Dependencies
         run: npm install --legacy-peer-deps # Ajout pour gérer les dépendances conflictuelles
+             npm install @fortawesome/fontawesome-svg-core @fortawesome/react-fontawesome @fortawesome/free-solid-svg-icons --save # Ajout explicite de FontAwesome
+
 
       - name: Fix Linting Issues
         run: npm run lint --fix || true # Ignore les erreurs de lint, mais corrige automatiquement ce qui peut l'être
