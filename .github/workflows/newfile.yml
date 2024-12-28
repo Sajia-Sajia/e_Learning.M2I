@@ -3,10 +3,10 @@ name: Front-End CI/CD Pipeline
 on:
   push:
     branches:
-      - main # Exécute le workflow sur chaque push vers la branche main
+      - github_actions # Exécute le workflow sur chaque push vers la branche main
   pull_request:
     branches:
-      - main # Exécute le workflow sur chaque pull request vers la branche main
+      - github_actions # Exécute le workflow sur chaque pull request vers la branche main
 
 jobs:
   build-test-deploy:
@@ -33,7 +33,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      # Étape 4 : Installation des dépendances
+      # Étape 4 : Installation des dépendances 
       - name: Install Dependencies
         run: npm install --legacy-peer-deps # Gestion des conflits potentiels
 
