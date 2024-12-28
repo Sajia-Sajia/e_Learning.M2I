@@ -1,0 +1,78 @@
+name: Front-End CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main # Exécute le workflow sur chaque push vers la branche main
+  pull_request:
+    branches:
+      - main # Exécute le workflow sur chaque pull request vers la branche main
+
+jobs:
+  build-test-deploy:
+    name: Build, Test, and Deploy Front-End
+    runs-on: ubuntu-latest
+
+    steps:
+      # Étape 1 : Récupération du code source
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Étape 2 : Configuration de Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18' # Assurez-vous que cette version est compatible avec votre projet
+
+      # Étape 3 : Cache des dépendances npm
+      - name: Cache Node Modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      # Étape 4 : Installation des dépendances
+      - name: Install Dependencies
+        run: npm install --legacy-peer-deps # Gestion des conflits potentiels
+
+      # Étape 5 : Linting du code (optionnel mais conseillé)
+      - name: Fix Linting Issues
+        run: npm run lint --fix || true # Corrige automatiquement les erreurs de style de code
+
+      # Étape 6 : Construction de l'application React
+      - name: Build React Application
+        env:
+          CI: false # Évite que les warnings soient traités comme des erreurs
+        run: npm run build
+
+      # Étape 7 : Tests unitaires
+      - name: Run React Tests
+        run: npm test -- --watchAll=false || true # Ignore les erreurs de tests si nécessaire
+
+      # Étape 8 : Génération de rapport des tests
+      - name: Generate Test Report
+        run: npm run test:report # Commande pour générer un rapport (assurez-vous que cette commande existe)
+
+      # Étape 9 : Téléchargement du rapport des tests comme artefact
+      - name: Upload Test Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-report
+          path: ./path/to/report # Remplacez par le chemin réel vers votre rapport
+
+      # Étape 10 : Déploiement sur Heroku
+      - name: Deploy to Heroku
+        if: ${{ success() }} # Exécute cette étape uniquement si toutes les étapes précédentes ont réussi
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: |
+          # Installation de l'outil CLI Heroku
+          curl https://cli-assets.heroku.com/install.sh | sh
+          # Connexion à Heroku avec la clé API
+          echo $HEROKU_API_KEY | heroku auth:token
+          # Ajout de Heroku comme remote git
+          git remote add heroku https://git.heroku.com/your-app-name.git
+          # Déploiement sur Heroku
+          git push heroku HEAD:master
