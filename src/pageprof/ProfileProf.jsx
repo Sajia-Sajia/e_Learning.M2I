@@ -15,7 +15,7 @@ function ProfileProf() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const profId = "6738e2dbca70207704909f4b";
+        const profId = "6740d3274256891eb2527b5b";
 
         axios.get(`http://localhost:8082/professeur/get/${profId}`)
       .then(response => {

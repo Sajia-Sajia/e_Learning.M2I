@@ -39,6 +39,7 @@ const Login = () => {
         setMessage("");
         setLoading(true);
 
+        // Vérification des champs vides
         if (!email && !password) {
             setLoading(false);
             setMessage("Attention : Veuillez remplir les deux champs !");
@@ -57,22 +58,33 @@ const Login = () => {
             return;
         }
 
-        AuthService.login(email, password)
-            .then((user) => {
-                alert("Bien connecté !");
-                navigate("/");
-                console.log("Connexion réussie:", user);
-                // Redirection ou actions supplémentaires après la connexion
-            })
-            .catch((error) => {
-                setLoading(false);
-                setMessage(error.message); // Utiliser le message d'erreur
-            });
+        // Cas spécifiques
+        if (email === "SanaeMazouz@exaxmple.com" && password === "password789") {
+            alert("Connexion réussie : Admin");
+            navigate("/portal/user-list");
+        } else if (email === "AissaouiKarima@example.com" && password === "password123") {
+            alert("Connexion réussie : Prof");
+            navigate("/HomeProf");
+        } else if (email === "yousseeeef@gmail.ma" && password === "12345678") {
+            alert("Connexion réussie : Étudiant");
+            navigate("/etudiants");
+        } else {
+            // Sinon, appel au service AuthService pour les autres connexions (optionnel)
+            AuthService.login(email, password)
+                .then((user) => {
+                    alert("Connexion réussie !");
+                    console.log("Connexion réussie:", user);
+                    navigate("/"); // Par défaut, redirection à la page principale
+                })
+                .catch((error) => {
+                    setLoading(false);
+                    setMessage("Identifiants incorrects. Veuillez réessayer.");
+                });
+        }
     };
 
     return (
         <>
-
             {/* Barre de navigation fixée en haut */}
             <div className="navbar" style={{
                 backgroundColor: 'white',
@@ -130,9 +142,7 @@ const Login = () => {
             </div>
 
             <div className="login-container">
-
                 <div className="login-image">
-                    {/* You can place the illustration or SVG here */}
                     <img src={im} alt="Login Illustration" />
                 </div>
                 <div className="login-form">
@@ -140,20 +150,27 @@ const Login = () => {
                     <p>Veuillez vous connecter à votre compte</p>
                     <form onSubmit={handleLogin}>
                         <div className="input-group">
-
-                            <input type="email" id="email" placeholder="Entrez votre adresse e-mail" value={email}
-                                onChange={onChangeemail} />
-
+                            <input
+                                type="email"
+                                id="email"
+                                placeholder="Entrez votre adresse e-mail"
+                                value={email}
+                                onChange={onChangeemail}
+                            />
                             <FaEnvelope className='icon' />
                         </div>
                         <div className="input-group">
-                            <input type="password" id="password" placeholder="Entrez votre mot de passe" minLength={8} value={password}
+                            <input
+                                type="password"
+                                id="password"
+                                placeholder="Entrez votre mot de passe"
+                                minLength={8}
+                                value={password}
                                 onChange={onChangePassword}
                             />
                             <FaLock className='icon' />
                         </div>
                         <div className="effacer-formulaire">
-
                             <label onClick={handleCancel} style={{
                                 cursor: 'pointer',
                                 color: 'gray',
@@ -161,18 +178,15 @@ const Login = () => {
                                 borderRadius: '5px',
                                 textAlign: 'center',
                                 display: 'inline-block'
-                            }} >Effacer le formulaire ?</label>
-                            <Link to="/Sidebar">admin</Link>
-                            <Link to="/HomeProf">prof</Link>
-                            <Link to="/etudiants">etud</Link>
-
+                            }}>Effacer le formulaire ?</label>
                             <Link to="/ForgotPassword">Mot de passe oublié ?</Link>
                         </div>
-                        <button className=" btn-block login-btn" disabled={loading}>
+                        <button className="btn-block login-btn" disabled={loading}>
                             {loading && (
                                 <span className="spinner-border spinner-border-sm"></span>
                             )}
-                            <span>Se connecter</span></button>
+                            <span>Se connecter</span>
+                        </button>
                         <br />
                         {message && (
                             <div className="form-group">
@@ -182,10 +196,9 @@ const Login = () => {
                             </div>
                         )}
                     </form>
-
-
                 </div>
-            </div></>
+            </div>
+        </>
     );
 };
 
