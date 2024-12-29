@@ -14,7 +14,7 @@ function Edit() {
 
   const getUserData = async () => {
     try {
-      const response = await axios.get(`http://localhost:8085/api/professeurs/${params.id}`); // API pour récupérer un professeur
+      const response = await axios.get(`http://localhost:8082/api/professeurs/${params.id}`); // API pour récupérer un professeur
       const data = response.data;
       data.modules = Array.isArray(data.modules) ? data.modules.join(", ") : ""; // Convertir le tableau en chaîne pour affichage
       myFormik.setValues(data);
@@ -68,7 +68,7 @@ function Edit() {
           ...values,
           modules: values.modules.split(",").map((mod) => mod.trim()), // Convertir la chaîne en tableau
         };
-        await axios.put(`http://localhost:8085/api/professeurs/${params.id}`, updatedValues); // API pour modifier un professeur
+        await axios.put(`http://localhost:8082/api/professeurs/${params.id}`, updatedValues); // API pour modifier un professeur
         navigate("/portal/list"); // Redirection après soumission réussie
       } catch (error) {
         console.error("Erreur lors de la mise à jour :", error);
