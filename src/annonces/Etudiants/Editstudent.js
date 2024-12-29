@@ -14,7 +14,7 @@ function Editstudent() {
 
   const getStudentData = async () => {
     try {
-      const response = await axios.get(`http://localhost:8085/etudiants/${id}`); // URL de votre API
+      const response = await axios.get(`http://localhost:8082/etudiants/${id}`); // URL de votre API
       myFormik.setValues(response.data); // Remplit le formulaire avec les données
       setLoading(false);
     } catch (error) {
@@ -65,7 +65,7 @@ function Editstudent() {
     onSubmit: async (values) => {
       try {
         setLoading(true);
-        await axios.put(`http://localhost:8085/etudiants/${id}`, values); // URL de votre API
+        await axios.put(`http://localhost:8082/etudiants/${id}`, values); // URL de votre API
         navigate("/portal/liststudent"); // Redirige après la soumission
       } catch (error) {
         console.error("Erreur lors de la mise à jour :", error);
