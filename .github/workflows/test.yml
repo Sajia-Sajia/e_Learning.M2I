@@ -3,10 +3,10 @@ name: Front-End CI/CD Pipeline
 on:
   push:
     branches:
-      - main
+      - final_branch
   pull_request:
     branches:
-      - main
+      - final_branch
 
 jobs:
   build-test-frontend:
@@ -20,21 +20,21 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18' # Mettez à jour pour éviter les problèmes de compatibilité avec Node.js
+          node-version: '18' # Utilise la version 18 de Node.js
 
       # Étape 3 : Installation des dépendances
       - name: Install Dependencies
         run: |
           npm install --legacy-peer-deps
           npm install @fortawesome/fontawesome-svg-core @fortawesome/react-fontawesome @fortawesome/free-solid-svg-icons --save # Ajout explicite de FontAwesome
-
+          npm install @emotion/react @emotion/styled --save # Ajout des dépendances manquantes
 
       - name: Fix Linting Issues
-        run: npm run lint --fix || true # Ignore les erreurs de lint, mais corrige automatiquement ce qui peut l'être
+        run: npm run lint --fix || true # Corrige automatiquement les erreurs de lint
 
       - name: Build React Application
         env:
-          CI: false # Ajout pour éviter que les warnings ne soient traités comme des erreurs
+          CI: false # Évite que les warnings soient traités comme des erreurs
         run: npm run build
 
       - name: Run React Tests
