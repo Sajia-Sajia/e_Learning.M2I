@@ -1,41 +1,21 @@
 import React, { useState } from 'react';
-import { AppBar, Toolbar, Typography, Button, Box, Dialog, DialogTitle, DialogContent, TextField, DialogActions, Menu, MenuItem } from '@mui/material';
+import { AppBar, Toolbar, Typography, Button, Box, Dialog, DialogTitle, DialogContent, TextField, DialogActions, Snackbar, Alert, Menu, MenuItem } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import { Link, useNavigate } from 'react-router-dom';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import emailjs from 'emailjs-com';
 
 const Header = ({ showSemester }) => {
-    const [anchorElProgram, setAnchorElProgram] = useState(null);
-    const [anchorElOpportunite, setAnchorElOpportunite] = useState(null);
     const [openContactForm, setOpenContactForm] = useState(false);
     const [contactForm, setContactForm] = useState({ name: '', email: '', message: '' });
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
+    const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+    const [anchorElOpportunite, setAnchorElOpportunite] = useState(null);
 
     const navigate = useNavigate();
-
-    const handleProgramOpen = (event) => setAnchorElProgram(event.currentTarget);
-    const handleProgramClose = () => setAnchorElProgram(null);
-
-    const handleOpportuniteOpen = (event) => setAnchorElOpportunite(event.currentTarget);
-    const handleOpportuniteClose = () => setAnchorElOpportunite(null);
-
-    const handleProgramClick = () => {
-        navigate('/ProgramPage');
-        handleProgramClose();
-    };
-
-    const handleScrollToSection = (sectionId) => {
-        const sectionElement = document.getElementById(sectionId);
-        if (sectionElement) {
-            sectionElement.scrollIntoView({ behavior: 'smooth' });
-        } else {
-            console.warn(`Element with ID "${sectionId}" not found.`);
-        }
-        handleProgramClose();
-    };
 
     const handleOpenContactForm = () => setOpenContactForm(true);
     const handleCloseContactForm = () => setOpenContactForm(false);
@@ -46,28 +26,45 @@ const Header = ({ showSemester }) => {
     };
 
     const handleContactFormSubmit = (e) => {
-        e.preventDefault();
-        emailjs.send('service_jgawclq', 'template_gedzw5f', {
-            name: contactForm.name,
-            email: contactForm.email,
-            message: contactForm.message
-        }, 'gTIz9zM9FyaFhrvU3')
-            .then((response) => {
-                console.log('Email sent successfully to admin', response.status, response.text);
-                return emailjs.send('service_jgawclq', 'template_gxh492d', {
-                    name: contactForm.name,
-                    email: contactForm.email,
-                    message: contactForm.message
-                }, 'gTIz9zM9FyaFhrvU3');
-            })
-            .then((response) => {
-                console.log('Confirmation email sent successfully to user', response.status, response.text);
-                handleCloseContactForm();
-            })
-            .catch((error) => {
-                console.error('Failed to send email:', error);
-            });
+    e.preventDefault();
+
+    emailjs.send('service_jgawclq', 'template_gedzw5f', {
+        name: contactForm.name,
+        email: contactForm.email,
+        message: contactForm.message
+    }, 'vZ4IfQNuT4CfYqiuB')
+        .then((response) => {
+            console.log('Email sent successfully to admin', response.status, response.text);
+
+            // Envoi du second template
+            return emailjs.send('service_jgawclq', 'template_gxh492d', {
+                name: contactForm.name,
+                email: contactForm.email,
+                message: contactForm.message
+            }, 'vZ4IfQNuT4CfYqiuB');
+        })
+        .then((response) => {
+            console.log('Second email (template_gxh492d) sent successfully', response.status, response.text);
+            setSnackbarMessage('Votre message a été envoyé avec succès. Merci!');
+            setSnackbarSeverity('success');
+            setSnackbarOpen(true);
+            handleCloseContactForm();
+        })
+        .catch((error) => {
+            console.error('Failed to send email:', error);
+            setSnackbarMessage('Une erreur est survenue. Veuillez réessayer.');
+            setSnackbarSeverity('error');
+            setSnackbarOpen(true);
+        });
+};
+
+
+    const handleSnackbarClose = () => {
+        setSnackbarOpen(false);
     };
+
+    const handleOpportuniteOpen = (event) => setAnchorElOpportunite(event.currentTarget);
+    const handleOpportuniteClose = () => setAnchorElOpportunite(null);
 
     return (
         <>
@@ -111,7 +108,7 @@ const Header = ({ showSemester }) => {
                     }}>
                         <Button
                             sx={{ color: 'black' }}
-                            onClick={() => handleScrollToSection('home')}
+                            onClick={() => navigate('/')}
                         >
                             <HomeIcon sx={{ marginRight: '5px', color: 'rgba(128, 128, 128, 0.5)' }} />
                             Home
@@ -119,7 +116,7 @@ const Header = ({ showSemester }) => {
 
                         <Button
                             sx={{ color: 'black' }}
-                            onClick={handleProgramClick}
+                            onClick={() => navigate('/ProgramPage')}
                         >
                             <MenuBookIcon sx={{ marginRight: '5px', color: 'rgba(128, 128, 128, 0.5)' }} />
                             Programme
@@ -137,27 +134,15 @@ const Header = ({ showSemester }) => {
                                 anchorEl={anchorElOpportunite}
                                 open={Boolean(anchorElOpportunite)}
                                 onClose={handleOpportuniteClose}
-                                sx={{ backgroundColor: 'rgba(0, 123, 255, 0.1)' }}
                             >
-                                <MenuItem onClick={() => window.open('https://www.linkedin.com', '_blank')} sx={{ display: 'flex', alignItems: 'center' }}>
-                                    <LinkedInIcon sx={{ marginRight: '10px', color: '#0077b5', fontSize: '24px' }} />
+                                <MenuItem onClick={() => window.open('https://www.linkedin.com', '_blank')}>
                                     LinkedIn
                                 </MenuItem>
-                                <MenuItem onClick={() => window.open('https://www.indeed.com', '_blank')} sx={{ display: 'flex', alignItems: 'center' }}>
-                                    <img src="/images/indeed.png" alt="Indeed" style={{ width: '20px', marginRight: '10px' }} />
+                                <MenuItem onClick={() => window.open('https://www.indeed.com', '_blank')}>
                                     Indeed
                                 </MenuItem>
-                                <MenuItem onClick={() => window.open('https://myjobalert.ma/', '_blank')} sx={{ display: 'flex', alignItems: 'center' }}>
-                                    <img src="/images/mjaLogo-nbg.png" alt="MyJobAlert" style={{ width: '29px', marginRight: '10px' }} />
+                                <MenuItem onClick={() => window.open('https://myjobalert.ma/', '_blank')}>
                                     MyJobAlert
-                                </MenuItem>
-                                <MenuItem onClick={() => window.open('https://www.edx.org', '_blank')} sx={{ display: 'flex', alignItems: 'center' }}>
-                                    <img src="/images/edx.png" alt="edX" style={{ width: '24px', marginRight: '10px' }} />
-                                    edX
-                                </MenuItem>
-                                <MenuItem onClick={() => window.open('https://www.coursera.org', '_blank')} sx={{ display: 'flex', alignItems: 'center' }}>
-                                    <img src="/images/LG2.png" alt="Coursera" style={{ width: '24px', marginRight: '10px' }} />
-                                    Coursera
                                 </MenuItem>
                             </Menu>
                         </div>
@@ -234,6 +219,20 @@ const Header = ({ showSemester }) => {
                     </Button>
                 </DialogActions>
             </Dialog>
+
+            <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={6000}
+                onClose={handleSnackbarClose}
+            >
+                <Alert
+                    onClose={handleSnackbarClose}
+                    severity={snackbarSeverity}
+                    sx={{ width: '100%' }}
+                >
+                    {snackbarMessage}
+                </Alert>
+            </Snackbar>
         </>
     );
 };
