@@ -14,7 +14,7 @@ function UserEdit() {
 
   const getAnnonceData = async () => {
     try {
-      const response = await axios.get(`http://localhost:8085/Annonce/get/${id}`);
+      const response = await axios.get(`http://localhost:8082/Annonce/get/${id}`);
       myFormik.setValues(response.data);
       setLoading(false);
     } catch (error) {
@@ -46,7 +46,7 @@ function UserEdit() {
     onSubmit: async (values) => {
       try {
         setLoading(true);
-        await axios.put(`http://localhost:8085/Annonce/update/${id}`, values);
+        await axios.put(`http://localhost:8082/Annonce/update/${id}`, values);
         setLoading(false);
         navigate("/portal/user-list");
       } catch (error) {
