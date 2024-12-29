@@ -29,7 +29,7 @@ function UserCreate() {
     onSubmit: async (values) => {
       try {
         setLoading(true);
-        await axios.post("http://localhost:8085/Annonce/add", values);
+        await axios.post("http://localhost:8082/Annonce/add", values);
         navigate("/portal/user-list");
       } catch (error) {
         console.error("Erreur lors de la création :", error);
