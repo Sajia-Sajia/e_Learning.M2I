@@ -53,7 +53,7 @@ function Createstudent() {
         await axios.post("http://localhost:8082/etudiants", values); // URL de votre API
         navigate("/portal/liststudent"); // Redirige après la soumission
       } catch (error) {
-        console.error("Erreur lors de la création :", error);
+        console.error("Erreur lors de la création d'etudiant :", error);
         setLoading(false);
       }
     },
