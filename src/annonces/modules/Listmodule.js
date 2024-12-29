@@ -80,7 +80,7 @@ function Listmodule() {
                 <td>{module.description}</td>
                 <td>
                   <Link to={`/portal/editmodule/${module.id}`} className="btn btn-info btn-sm mr-2">
-                    Modifier
+                    edit
                   </Link>
                   <button onClick={() => handleDelete(module.id)} className="btn btn-danger btn-sm">
                     Supprimer
