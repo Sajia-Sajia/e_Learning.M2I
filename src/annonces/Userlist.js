@@ -17,7 +17,7 @@ function Userlist() {
   const getUsers = async () => {
     try {
       //modifier par nabil 8082
-      const response = await axios.get("http://localhost:8085/Annonce"); // URL du backend
+      const response = await axios.get("http://localhost:8082/Annonce"); // URL du backend
       setUserList(response.data); // Stocke les données renvoyées par l'API
       setLoading(false); // Arrête l'affichage du loader
     } catch (error) {
@@ -30,7 +30,7 @@ function Userlist() {
     try {
       const confirmDelete = window.confirm("Êtes-vous sûr de vouloir supprimer cette annonce ?");
       if (confirmDelete) {
-        await axios.delete(`http://localhost:8085/Annonce/delete/${id}`); // Supprime l'annonce
+        await axios.delete(`http://localhost:8082/Annonce/delete/${id}`); // Supprime l'annonce
         getUsers(); // Rafraîchit la liste des annonces
       }
     } catch (error) {
