@@ -50,7 +50,7 @@ function Createstudent() {
     onSubmit: async (values) => {
       try {
         setLoading(true);
-        await axios.post("http://localhost:8085/etudiants", values); // URL de votre API
+        await axios.post("http://localhost:8082/etudiants", values); // URL de votre API
         navigate("/portal/liststudent"); // Redirige après la soumission
       } catch (error) {
         console.error("Erreur lors de la création :", error);
