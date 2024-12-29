@@ -14,7 +14,7 @@ function Editmodule() {
 
   const fetchModule = async () => {
     try {
-      const response = await axios.get(`http://localhost:8085/api/modules/${id}`);
+      const response = await axios.get(`http://localhost:8082/api/modules/${id}`);
       formik.setValues(response.data);
     } catch (error) {
       console.error("Erreur lors de la récupération du module :", error);
@@ -39,7 +39,7 @@ function Editmodule() {
     onSubmit: async (values) => {
       try {
         setLoading(true);
-        await axios.put(`http://localhost:8085/api/modules/${id}`, values);
+        await axios.put(`http://localhost:8082/api/modules/${id}`, values);
         navigate("/portal/listmodule");
       } catch (error) {
         console.error("Erreur lors de la mise à jour :", error);
