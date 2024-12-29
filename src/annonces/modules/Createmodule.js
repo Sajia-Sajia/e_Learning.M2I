@@ -25,7 +25,7 @@ function Createmodule() {
     onSubmit: async (values) => {
       try {
         setLoading(true);
-        await axios.post("http://localhost:8085/api/modules", values);
+        await axios.post("http://localhost:8082/api/modules", values);
         navigate("/portal/listmodule");
       } catch (error) {
         console.error("Erreur lors de la création :", error);
