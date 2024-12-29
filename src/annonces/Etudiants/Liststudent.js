@@ -19,7 +19,7 @@ function Liststudent() {
   const getStudents = async () => {
     try {
       //modifier par nabil 
-      const response = await axios.get("http://localhost:8085/etudiants"); // Endpoint back-end
+      const response = await axios.get("http://localhost:8082/etudiants"); // Endpoint back-end
       setStudentList(response.data); // Mise à jour de la liste des étudiants
       setFilteredStudents(response.data); // Initialise avec toutes les données
       setLoading(false); // Fin du chargement
@@ -44,7 +44,7 @@ function Liststudent() {
     try {
       const confirmDelete = window.confirm("Êtes-vous sûr de vouloir supprimer cet étudiant ?");
       if (confirmDelete) {
-        await axios.delete(`http://localhost:8085/etudiants/${id}`); // Endpoint pour supprimer un étudiant
+        await axios.delete(`http://localhost:8082/etudiants/${id}`); // Endpoint pour supprimer un étudiant
         getStudents(); // Mise à jour de la liste après suppression
       }
     } catch (error) {
