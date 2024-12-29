@@ -89,8 +89,8 @@ function Userlist() {
                       <td>{item.type}</td>
                       <td>{item.auteur_id}</td>
                       <td>
-                        <Link to={`/portal/user-edit/${item.id}`} className='btn btn-info btn-sm mr-1'>Edit</Link>
-                        <button onClick={() => handleDelete(item.id)} className='btn btn-danger btn-sm mr-1'>Delete</button>
+                        <Link to={`/portal/user-edit/${item.id}`} className='btn btn-info btn-sm mr-1'>modifier</Link>
+                        <button onClick={() => handleDelete(item.id)} className='btn btn-danger btn-sm mr-1'>supprimer</button>
                       </td>
                     </tr>
                   ))}
