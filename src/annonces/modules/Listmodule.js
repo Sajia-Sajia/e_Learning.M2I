@@ -14,7 +14,7 @@ function Listmodule() {
 
   const fetchModules = async () => {
     try {
-      const response = await axios.get("http://localhost:8085/api/modules");
+      const response = await axios.get("http://localhost:8082/api/modules");
       setModules(response.data);
       setFilteredModules(response.data); // Initialise la liste filtrée
       setLoading(false);
@@ -27,7 +27,7 @@ function Listmodule() {
     try {
       const confirmDelete = window.confirm("Êtes-vous sûr de vouloir supprimer ce module ?");
       if (confirmDelete) {
-        await axios.delete(`http://localhost:8085/api/modules/${id}`);
+        await axios.delete(`http://localhost:8082/api/modules/${id}`);
         fetchModules(); // Recharge la liste après suppression
       }
     } catch (error) {
