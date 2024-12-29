@@ -21,7 +21,7 @@ function List() {
   // Récupération de la liste des professeurs via l'API
   const getProfesseurs = async () => {
     try {
-      const response = await axios.get("http://localhost:8085/api/professeurs"); // Endpoint API back-end
+      const response = await axios.get("http://localhost:8082/api/professeurs"); // Endpoint API back-end
       setProfList(response.data); // Mise à jour de la liste des professeurs
       setLoading(false); // Fin du chargement
     } catch (error) {
@@ -52,7 +52,7 @@ function List() {
     try {
       const confirmDelete = window.confirm("Êtes-vous sûr de vouloir supprimer ce professeur ?");
       if (confirmDelete) {
-        await axios.delete(`http://localhost:8085/api/professeurs/${id}`); // Endpoint pour supprimer un professeur
+        await axios.delete(`http://localhost:8082/api/professeurs/${id}`); // Endpoint pour supprimer un professeur
         getProfesseurs(); // Mise à jour de la liste après suppression
       }
     } catch (error) {
