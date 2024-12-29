@@ -49,7 +49,7 @@ function Create() {
       try {
         setLoading(true);
         values.modules = values.modules.split(",").map((mod) => mod.trim()); // Convertir les modules en tableau
-        await axios.post("http://localhost:8085/api/professeurs", values); // Endpoint API
+        await axios.post("http://localhost:8082/api/professeurs", values); // Endpoint API
         navigate("/portal/list"); // Redirection après soumission réussie
       } catch (error) {
         console.error("Erreur lors de la création :", error);
