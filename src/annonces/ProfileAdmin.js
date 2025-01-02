@@ -1,33 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import './Dashboard.css'; // Importation des styles CSS
-import axios from 'axios'; // Assurez-vous d'avoir axios installé
+import React, { useState } from "react";
+import "./Dashboard.css"; // Importation des styles CSS
 
 function ProfileAdmin() {
     const [isEditing, setIsEditing] = useState(false);
     const [adminInfo, setAdminInfo] = useState({
-        nom: "",
-        prenom: "",
-        cin: "",
-        email: "",
-        motdepasse: "",
-        modules: [],
-        isadmin: false,
-        imageURL: ""
+        id: "6738e2dbca70207704909f4b",
+        nom: "Sanaeff",
+        prenom: "Mazouz",
+        cin: "A123456",
+        email: "SanaeMazouz@example.com",
+        motdepasse: "password123",
+        modules: ["Histoire", "Géographie", "Philosophie"],
+        isadmin: true,
+        imageURL: "" // URL de l'image si nécessaire
     });
-
-    // Charger les informations de l'administrateur au démarrage
-    useEffect(() => {
-        const fetchAdminInfo = async () => {
-            try {
-                const response = await axios.get('http://localhost:8082/professeur/admin/profile/6738e2dbca70207704909f4b'); // Remplacez par l'ID approprié
-                setAdminInfo(response.data);
-            } catch (error) {
-                console.error("Erreur lors de la récupération des informations:", error);
-            }
-        };
-
-        fetchAdminInfo();
-    }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -41,14 +27,10 @@ function ProfileAdmin() {
         setIsEditing(true);
     };
 
-    const handleSave = async () => {
-        try {
-            await axios.put(`http://localhost:8082/professeur/admin/update/${adminInfo.id}`, adminInfo); // Assurez-vous que adminInfo.id est correct
-            console.log("Données sauvegardées:", adminInfo);
-            setIsEditing(false);
-        } catch (error) {
-            console.error("Erreur lors de la sauvegarde des informations:", error);
-        }
+    const handleSave = () => {
+        console.log("Données sauvegardées:", adminInfo);
+        setIsEditing(false);
+        alert("Les modifications ont été sauvegardées !");
     };
 
     return (
@@ -132,7 +114,14 @@ function ProfileAdmin() {
                                             type="text"
                                             name="modules"
                                             value={adminInfo.modules.join(", ")}
-                                            onChange={handleChange}
+                                            onChange={(e) =>
+                                                handleChange({
+                                                    target: {
+                                                        name: "modules",
+                                                        value: e.target.value.split(",").map(mod => mod.trim())
+                                                    }
+                                                })
+                                            }
                                             className="form-control"
                                         />
                                     </td>
@@ -152,11 +141,11 @@ function ProfileAdmin() {
                                                 src={adminInfo.imageURL}
                                                 alt="Aperçu"
                                                 style={{
-                                                    width: '100px',
-                                                    height: '100px',
-                                                    marginTop: '10px',
-                                                    borderRadius: '50%',
-                                                    objectFit: 'cover'
+                                                    width: "100px",
+                                                    height: "100px",
+                                                    marginTop: "10px",
+                                                    borderRadius: "50%",
+                                                    objectFit: "cover"
                                                 }}
                                             />
                                         )}
@@ -203,10 +192,10 @@ function ProfileAdmin() {
                                             src={adminInfo.imageURL}
                                             alt="Profil"
                                             style={{
-                                                width: '100px',
-                                                height: '100px',
-                                                borderRadius: '50%',
-                                                objectFit: 'cover'
+                                                width: "100px",
+                                                height: "100px",
+                                                borderRadius: "50%",
+                                                objectFit: "cover"
                                             }}
                                         />
                                     ) : (
